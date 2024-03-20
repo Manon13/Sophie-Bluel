@@ -1,12 +1,13 @@
-async function genererProjets(projets) {
+async function genererProjets() {
     const reponse = await fetch('http://localhost:5678/api/works');
-    const projets = await reponse.json();
+    const works = await reponse.json();
 
-    for (let i = 0; i < projets.length; i++) {
+    console.log(works);
+    for (let i = 0; i < works.length; i++) {
 
-        const projet = projets[i];
+        const projet = works[i];
         //Récupération de l'élément DOM qui contiendra la gallery des projets
-        const divGallery = document.querySelector(".gallery");
+        const divGallery = document.querySelector("#gallery");
         //Création d'une balise dédié à un projet
         const figureProjet = document.createElement("figure");
         //Ajout de la classe "projet" à la balise figure
@@ -23,9 +24,10 @@ async function genererProjets(projets) {
 
         //On rattache la balise figure à la div de gallery
         divGallery.appendChild(figureProjet);
+        //On rattache les enfants de la figure
         figureProjet.appendChild(imgProjet);
         figureProjet.appendChild(figcaptionProjet);
     }
 }
 
-genererProjets(projets);
+genererProjets();
