@@ -56,17 +56,20 @@ async function filterCategory() {
     const category = await generateCategory();
 
     const divFilter = document.createElement("div");
+    divFilter.classList.add("divFilters");
     const divGallery = document.querySelector(".gallery");
     const sectionPortfolio = document.querySelector("#portfolio");
     sectionPortfolio.insertBefore(divFilter, divGallery);
 
     const allButton = document.createElement("button");
     allButton.innerText = "Tous";
+    allButton.classList.add("buttonFilter");
     divFilter.appendChild(allButton);
 
     for (let i = 0; i < category.length; i++) {
         const filter = category[i];
         const buttonFilter = document.createElement("button");
+        buttonFilter.classList.add("buttonFilter");
         buttonFilter.innerText = filter.name;
         divFilter.appendChild(buttonFilter);
     }
