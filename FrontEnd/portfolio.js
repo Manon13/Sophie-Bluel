@@ -45,15 +45,16 @@ generateProject();
 async function generateCategory() {
     const response = await fetch('http://localhost:5678/api/categories');
     const category = await response.json();
+    const categorySet = new Set(category.map(category => category.name));
     console.log(category);
-    return category;
+    return categorySet;
 }
 generateCategory();
 
 
 async function filterCategory() {
 
-    const category = await generateCategory();
+    const categorySet = await generateCategory();
 
     const divFilter = document.createElement("div");
     divFilter.classList.add("divFilters");
@@ -66,13 +67,12 @@ async function filterCategory() {
     allButton.classList.add("buttonFilter");
     divFilter.appendChild(allButton);
 
-    for (let i = 0; i < category.length; i++) {
-        const filter = category[i];
+    categorySet.forEach(categoryName => {
         const buttonFilter = document.createElement("button");
         buttonFilter.classList.add("buttonFilter");
-        buttonFilter.innerText = filter.name;
+        buttonFilter.innerText = categoryName;
         divFilter.appendChild(buttonFilter);
-    }
+    });
 
     //Test de la fonctionnalité de filtre 
     const buttons = document.querySelectorAll("button");
@@ -93,35 +93,3 @@ async function filterCategory() {
 }
 
 filterCategory();
-
-
-
-// async function filterCategory() {
-//     const filterCategory = await generateProject();
-
-//     //Création d'une balise div pour les filtres
-//     const divFilter = document.createElement("div");
-
-//     const sectionPortfolio = document.querySelector("#portfolio");
-//     const divGallery = document.querySelector(".gallery");
-//     sectionPortfolio.insertBefore(divFilter, divGallery);
-
-//     //Ajout de la classe "projet" à la balise figure
-//     divFilter.classList.add("filters");
-
-//     for (let i = 0; i < filterCategory.length; i++) {
-//         const filter = filterCategory[i];
-//         //Récupération de l'élément DOM qui contiendra la section "mes projets"
-//         const sectionPortfolio = document.querySelector("#portfolio");
-//         //Création d'une balise button pour chaque filtre
-//         const buttonFilter = document.createElement("button");
-//         buttonFilter.innerText = filter.categoryId;
-
-//         //On rattache la balise div à la section de portfolio
-//         sectionPortfolio.appendChild(divFilter);
-//         //On rattache les boutons à la div
-//         divFilter.appendChild(buttonFilter);
-//     }
-// }
-
-// filterCategory();
