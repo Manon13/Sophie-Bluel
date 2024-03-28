@@ -93,3 +93,29 @@ async function filterCategory() {
 }
 
 filterCategory();
+
+
+// function menuLink() {
+//     const currentPagePath = window.location.pathname;
+//     const links = document.querySelectorAll(".menuLink");
+//     links.forEach(link => {
+//         const linkPath = link.getAttribute("href");
+//         if (linkPath === currentPagePath) {
+//             link.classList.add("current-page");
+//         }
+//     });
+// }
+
+// menuLink();
+
+// function menuLink() {
+//     const links = document.querySelectorAll(".menuLink");
+//     links.forEach(link => {
+//       if (link.getAttribute('href') === window.location.pathname) {
+//         link.classList.add("current-page");
+//       }
+//     });
+//   }
+
+//   menuLink();
+
