@@ -249,7 +249,7 @@ form textarea{
 	width: 33%;
 	margin: auto;
 	margin-top: 140px;
-	margin-bottom: 300px;
+	margin-bottom: 350px;
 }
 
 #login h2{
@@ -296,4 +296,8 @@ form textarea{
 
 #login label{
 	margin: 2em 0 1em 0;
+}
+
+.current-page{
+	font-weight: bold;
 }
