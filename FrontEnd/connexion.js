@@ -1,4 +1,4 @@
-function functionConnexion(){
+function connexion(){
     const formConnexion = document.querySelector('.formConnexion');
     formConnexion.addEventListener("submit", function(event){
         event.preventDefault();
@@ -21,5 +21,4 @@ function functionConnexion(){
         });
     });
 }
-
 
