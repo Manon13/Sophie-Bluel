@@ -1,5 +1,5 @@
 //Fonction pour récupérer les projets depuis l'API
-async function recoverProjects() {
+async function recoverWorks() {
     const response = await fetch('http://localhost:5678/api/works');
     const works = await response.json();
     console.log(works);
@@ -8,7 +8,9 @@ async function recoverProjects() {
 
 
 async function generateProject() {
-    const works = await recoverProjects();
+    const works = await recoverWorks();
+
+    // Possible d'utiliser forEach() => https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach
     for (let i = 0; i < works.length; i++) {
         const project = works[i];
 
@@ -45,6 +47,8 @@ generateProject();
 async function generateCategory() {
     const response = await fetch('http://localhost:5678/api/categories');
     const category = await response.json();
+
+    // Vérifier qu'une catégorie soit unique avec la méthode has() de l'objet Set
     const categorySet = new Set(category.map(category => category.name));
     console.log(category);
     return categorySet;
@@ -52,7 +56,10 @@ async function generateCategory() {
 generateCategory();
 
 
-async function filterCategory() {
+/**
+ *
+ */
+async function filterWorkCategories() {
 
     const categorySet = await generateCategory();
 
@@ -62,6 +69,7 @@ async function filterCategory() {
     const sectionPortfolio = document.querySelector("#portfolio");
     sectionPortfolio.insertBefore(divFilter, divGallery);
 
+    // Création du boutton "Tous"
     const allButton = document.createElement("button");
     allButton.innerText = "Tous";
     allButton.classList.add("buttonFilter");
@@ -92,7 +100,7 @@ async function filterCategory() {
     });
 }
 
-filterCategory();
+filterWorkCategories();
 
 
 // function menuLink() {

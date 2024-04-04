@@ -1,4 +1,4 @@
-function connexion(){
+function functionConnexion() {
     const formConnexion = document.querySelector('.formConnexion');
     formConnexion.addEventListener("submit", function(event){
         event.preventDefault();
@@ -9,16 +9,17 @@ function connexion(){
             password: event.target.querySelector("[name=password]").value
         };
 
-        // Création de la charge utile au format JSON
-        const chargeUtile = JSON.stringify(connexion);
+        console.log(connexion);
+        console.log(JSON.stringify(connexion));
 
         // Appel de la fonction fetch avec toutes les informations nécessaires
-
-        fetch("http://localhost:5678/api/users/login", {
+        // Création de la charge utile au format JSON
+        /**fetch("http://localhost:5678/api/users/login", {
             method: "POST",
-            headers: { "Content-Type": "application/json"},
-            body: chargeUtile
-        });
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(connexion)
+        });*/
     });
 }
 
+functionConnexion()
