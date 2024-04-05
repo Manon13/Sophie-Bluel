@@ -298,6 +298,6 @@ form textarea{
 	margin: 2em 0 1em 0;
 }
 
-.current-page{
-	font-weight: bold;
+.error{
+	color: red;
 }
