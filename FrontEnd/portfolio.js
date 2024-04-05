@@ -2,7 +2,6 @@
 async function recoverWorks() {
     const response = await fetch('http://localhost:5678/api/works');
     const works = await response.json();
-    console.log(works);
     return works;
 }
 
@@ -44,16 +43,15 @@ async function generateProject() {
 generateProject();
 
 
-async function generateCategory() {
+async function generateCategories() {
     const response = await fetch('http://localhost:5678/api/categories');
-    const category = await response.json();
+    const categories = await response.json();
 
     // Vérifier qu'une catégorie soit unique avec la méthode has() de l'objet Set
-    const categorySet = new Set(category.map(category => category.name));
-    console.log(category);
-    return categorySet;
+    const categoriesSet = new Set(categories.map(category => category.name));
+    return categoriesSet;
 }
-generateCategory();
+generateCategories();
 
 
 /**
@@ -61,7 +59,7 @@ generateCategory();
  */
 async function filterWorkCategories() {
 
-    const categorySet = await generateCategory();
+    const categoriesSet = await generateCategories();
 
     const divFilter = document.createElement("div");
     divFilter.classList.add("divFilters");
@@ -75,7 +73,7 @@ async function filterWorkCategories() {
     allButton.classList.add("buttonFilter");
     divFilter.appendChild(allButton);
 
-    categorySet.forEach(categoryName => {
+    categoriesSet.forEach(categoryName => {
         const buttonFilter = document.createElement("button");
         buttonFilter.classList.add("buttonFilter");
         buttonFilter.innerText = categoryName;
@@ -88,7 +86,7 @@ async function filterWorkCategories() {
         button.addEventListener("click", () => {
             const projects = document.querySelectorAll(".project");
             projects.forEach(project => {
-                if (button.innerText === "Tous") {
+                if (button.innerText === "Tous" || categoriesSet.has(button.innerText) === false){
                     project.style.display = "block";
                 } else if (project.dataset.categoryName !== button.innerText) {
                     project.style.display = "none";
