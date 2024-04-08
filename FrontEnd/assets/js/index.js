@@ -25,8 +25,8 @@ function editionModeHeader() {
         const header = document.querySelector("header");
         const body = document.querySelector("body");
 
-        const divEdition = document.createElement("div");
-        divEdition.classList.add("divEdition");
+        const banner = document.createElement("div");
+        banner.classList.add("banner");
 
         const iconeEdition = document.createElement("i");
         iconeEdition.classList.add("fa-regular", "fa-pen-to-square", "iconeEdition");
@@ -37,8 +37,8 @@ function editionModeHeader() {
 
         // spanEdition.appendChild(iconeEdition);
         spanEdition.insertBefore(iconeEdition, spanEdition.firstChild);
-        divEdition.appendChild(spanEdition);
-        body.insertBefore(divEdition, header);
+        banner.appendChild(spanEdition);
+        body.insertBefore(banner, header);
     }
 };
 editionModeHeader();
@@ -47,8 +47,7 @@ function editWorksBtn() {
     const token = localStorage.getItem("token");
     if (token) {
 
-        const portfolio = document.getElementById("portfolio");
-        const divFilters = document.querySelector(".divFilter");
+        const titleWorks = document.querySelector(".titleWorks");
 
         const divModify = document.createElement("div");
         divModify.classList.add("divModify");
@@ -56,14 +55,16 @@ function editWorksBtn() {
         const iconeModify = document.createElement("i");
         iconeModify.classList.add("fa-regular", "fa-pen-to-square", "iconeModify");
 
-        const spanModify = document.createElement("span");
-        spanModify.innerText = "modifier";
-        spanModify.classList.add("spanModify");
+        const buttonModify = document.createElement("button");
+        buttonModify.innerText = "modifier";
+        buttonModify.classList.add("modifyBtn");
 
-        spanModify.insertBefore(iconeModify, spanModify.firstChild);
-        divModify.appendChild(spanModify);
-        portfolio.insertBefore(divModify, divFilters)
+        buttonModify.insertBefore(iconeModify, buttonModify.firstChild);
+        divModify.appendChild(buttonModify);
+        titleWorks.appendChild(buttonModify);
     }
 }
-
 editWorksBtn();
+
+
+
