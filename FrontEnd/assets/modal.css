@@ -1,0 +1,61 @@
+::backdrop {
+	background-color: rgba(0, 0, 0, 0.3);
+}
+
+dialog {
+	width: 630px;
+	height: 688px;
+	background-color: #fff;
+	border: none;
+	border-radius: 10px;
+	box-sizing: border-box;
+}
+
+.dialogContent{
+	display:flex;
+	flex-direction: column;
+	background-color: #fff;
+	margin: 10px 90px;
+}
+
+h3{
+	font-family: 'work sans';
+	text-align: center;
+	font-weight: 400;
+	font-size: 26px;
+	background-color: #fff;
+}
+
+.modalWorks{
+	margin-top: 46px;
+	padding-bottom: 67px;
+	border-bottom: 1px solid #B3B3B3;
+	background-color: #fff;
+}
+
+.close {
+	align-items: flex-end;
+	font-size: 32px;
+}
+
+.closeModalBtn {
+	border: none;
+	margin: 6px 16px 0px 562px;
+	cursor: pointer;
+}
+
+.addPhotoBtn{
+	height: 36px;
+	width: 237px;
+	font-family: 'Syne';
+	font-weight: 700;
+	font-size: 14px;
+	text-align: center;
+	color: white;
+	background-color: #1D6154;
+	border-radius: 60px;
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+	margin: 38px 90px 45px 90px;
+	cursor: pointer;
+}
