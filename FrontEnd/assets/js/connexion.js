@@ -6,13 +6,12 @@ function connexion() {
         removeErrorMessages();
 
         const emailInput = document.querySelector('#email');
-        const valueEmail = emailInput.value;
 
-        if (!validateEmail(valueEmail)) {
-            return;
+        if (!validateEmail(emailInput.value)) {
+            return null;
         }
 
-        if (false === isEmptyLoginFields()) {
+        if (!isEmptyLoginFields()) {
             return null;
         }
 
@@ -53,7 +52,7 @@ function connexion() {
                 }
             })
             .catch(error => {
-                showLoginError(error);
+                showLoginErrors(error);
                 //document.location.href = "./login.html";
             });
     });
@@ -79,7 +78,7 @@ function isEmptyLoginFields() {
     return true;
 };
 
-function showLoginError(error) {
+function showLoginErrors(error) {
     const form = document.querySelector('.formConnexion');
     const spanError = document.createElement("span");
     spanError.classList.add("error");
