@@ -30,7 +30,7 @@ document.addEventListener("click", function (event) {
 //Fonction pour créer une icone poubelle sur chaque projet
 async function trashIconeCreation() {
     const generateProjectOnModal = await generateProject(".modalWorks");
-    const figure = document.querySelectorAll(".project");
+    const figure = document.querySelectorAll(".modalWorks > .project");
 
     figure.forEach(project => {
         const trashIcone = document.createElement("i");
