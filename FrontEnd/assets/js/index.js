@@ -18,26 +18,26 @@ function logout() {
 logout();
 
 
-function editionModeHeader() {   
+function editionModeHeader() {
     const token = localStorage.getItem("token");
     if (token) {
 
         const header = document.querySelector("header");
         const body = document.querySelector("body");
 
+
         const banner = document.createElement("div");
         banner.classList.add("banner");
 
-        const iconeEdition = document.createElement("i");
-        iconeEdition.classList.add("fa-regular", "fa-pen-to-square", "iconeEdition");
+        const iconebanner = document.createElement("i");
+        iconebanner.classList.add("fa-regular", "fa-pen-to-square", "iconeBanner");
 
-        const spanEdition = document.createElement("span");
-        spanEdition.innerText = "Mode édition";
-        spanEdition.classList.add("spanEdition");
+        const spanBanner = document.createElement("span");
+        spanBanner.innerText = "Mode édition";
+        spanBanner.classList.add("spanBanner");
 
-        // spanEdition.appendChild(iconeEdition);
-        spanEdition.insertBefore(iconeEdition, spanEdition.firstChild);
-        banner.appendChild(spanEdition);
+        spanBanner.insertBefore(iconebanner, spanBanner.firstChild);
+        banner.appendChild(spanBanner);
         body.insertBefore(banner, header);
     }
 };
@@ -57,7 +57,7 @@ function editWorksBtn() {
 
         const buttonModify = document.createElement("button");
         buttonModify.innerText = "modifier";
-        buttonModify.classList.add("modifyBtn");
+        buttonModify.classList.add("openModalBtn");
 
         buttonModify.insertBefore(iconeModify, buttonModify.firstChild);
         divModify.appendChild(buttonModify);
