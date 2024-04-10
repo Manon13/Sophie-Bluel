@@ -3,8 +3,9 @@
 }
 
 dialog {
-	width: 630px;
-	height: 688px;
+	/* width: 630px;
+	height: 688px; */
+	padding:50px;
 	background-color: #fff;
 	border: none;
 	border-radius: 10px;
