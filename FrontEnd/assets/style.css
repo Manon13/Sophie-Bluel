@@ -397,11 +397,3 @@ form textarea {
 	display: flex;
 	justify-content: center;
 }
-
-#gallery .trashIcone{
-	display: none;
-}
-
-#gallery .buttonTrashIcone{
-	display: none;
-}
