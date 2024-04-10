@@ -6,7 +6,7 @@ async function recoverWorks() {
 }
 
 
-async function generateProject() {
+async function generateProject(rootSelector) {
     const works = await recoverWorks();
 
     // Possible d'utiliser forEach() => https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach
@@ -14,7 +14,7 @@ async function generateProject() {
         const project = works[i];
 
         //Récupération de l'élément DOM qui contiendra la gallery des projets
-        const divGallery = document.querySelector("#gallery");
+        const divGallery = document.querySelector(rootSelector);    //rootSelector = "#gallery"
 
         //Création d'une balise dédié à un projet
         const figureProjet = document.createElement("figure");
@@ -40,7 +40,7 @@ async function generateProject() {
     }
     return works;
 }
-generateProject();
+generateProject("#gallery");
 
 
 async function generateCategories() {
@@ -54,9 +54,6 @@ async function generateCategories() {
 generateCategories();
 
 
-/**
- *
- */
 async function filterWorkCategories() {
 
     const categoriesSet = await generateCategories();
@@ -101,27 +98,4 @@ async function filterWorkCategories() {
 filterWorkCategories();
 
 
-// function menuLink() {
-//     const currentPagePath = window.location.pathname;
-//     const links = document.querySelectorAll(".menuLink");
-//     links.forEach(link => {
-//         const linkPath = link.getAttribute("href");
-//         if (linkPath === currentPagePath) {
-//             link.classList.add("current-page");
-//         }
-//     });
-// }
-
-// menuLink();
-
-// function menuLink() {
-//     const links = document.querySelectorAll(".menuLink");
-//     links.forEach(link => {
-//       if (link.getAttribute('href') === window.location.pathname) {
-//         link.classList.add("current-page");
-//       }
-//     });
-//   }
-
-//   menuLink();
 
