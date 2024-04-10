@@ -3,6 +3,15 @@ function connexion() {
     form.addEventListener("submit", function (event) {
         event.preventDefault();
 
+        removeErrorMessages();
+
+        const emailInput = document.querySelector('#email');
+        const valueEmail = emailInput.value;
+
+        if (!validateEmail(valueEmail)) {
+            return;
+        }
+
         if (false === isEmptyLoginFields()) {
             return null;
         }
@@ -24,7 +33,7 @@ function connexion() {
             },
             body: JSON.stringify(connexion)
         })
-        .then(response => {
+            .then(response => {
                 if (401 === response.status) {
                     throw new Error("L'email ou le mot de passe est incorrecte. Veuillez réessayer.");
                 } else if (500 === response.status) {
@@ -33,7 +42,7 @@ function connexion() {
 
                 return response.json();
             })
-        .then(data => {
+            .then(data => {
                 // Stockage du token dans le localStorage
                 localStorage.setItem("token", data.token);
                 if (!data.token) {
@@ -43,10 +52,10 @@ function connexion() {
                     document.location.href = "./index.html"
                 }
             })
-        .catch(error => {
-            showLoginError(error);
-            //document.location.href = "./login.html";
-        });
+            .catch(error => {
+                showLoginError(error);
+                //document.location.href = "./login.html";
+            });
     });
 }
 connexion();
@@ -54,20 +63,19 @@ connexion();
 function isEmptyLoginFields() {
     const form = document.querySelector('.formConnexion');
 
-    const baliseEmail = document.querySelector('#email');
-    const valeurEmail = baliseEmail.value;
-    const balisePassword = document.querySelector('#password');
-    const valeurPassword = balisePassword.value;
-    
-    if (valeurEmail === '' || valeurPassword === '') {
-        const spanChampsVide = document.createElement("span");
-        spanChampsVide.classList.add("error");
-        spanChampsVide.innerText = "Veuillez remplir tous les champs";
-        form.appendChild(spanChampsVide);
+    const emailInput = document.querySelector('#email');
+    const valueEmail = emailInput.value;
+    const PasswordInput = document.querySelector('#password');
+    const valuePassword = PasswordInput.value;
+
+    if (valueEmail === '' || valuePassword === '') {
+        const spanEmptyFields = document.createElement("span");
+        spanEmptyFields.classList.add("error");
+        spanEmptyFields.innerText = "Veuillez remplir tous les champs";
+        form.appendChild(spanEmptyFields);
 
         return false;
     }
-
     return true;
 };
 
@@ -75,6 +83,30 @@ function showLoginError(error) {
     const form = document.querySelector('.formConnexion');
     const spanError = document.createElement("span");
     spanError.classList.add("error");
-    spanError.innerText = "L'email ou le mot de passe est incorrecte. Veuillez réessayer.";
+    spanError.innerText = "L'email ou le mot de passe saisie est incorrecte. Veuillez réessayer.";
     form.appendChild(spanError);
+};
+
+
+function removeErrorMessages() {
+    const form = document.querySelector('.formConnexion');
+    const errorsSpan = form.querySelectorAll('.error');
+    errorsSpan.forEach(spanError => {
+        spanError.remove();
+    });
+
+}
+
+
+function validateEmail(email) {
+    const form = document.querySelector('.formConnexion');
+    const emailRegExp = new RegExp('^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$');
+    if (!emailRegExp.test(email)) {
+        const spanEmailIncorrect = document.createElement("span");
+        spanEmailIncorrect.classList.add("error");
+        spanEmailIncorrect.innerText = "Veuillez saisir une adresse email valide";
+        form.appendChild(spanEmailIncorrect);
+        return false;
+    }
+    return true;
 };
