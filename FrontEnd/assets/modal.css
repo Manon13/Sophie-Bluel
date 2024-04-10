@@ -15,7 +15,8 @@ dialog {
 	display:flex;
 	flex-direction: column;
 	background-color: #fff;
-	margin: 10px 90px;
+	margin: 0px 85px;
+	width: 420px;
 }
 
 h3{
@@ -28,9 +29,10 @@ h3{
 
 .modalWorks{
 	margin-top: 46px;
-	padding-bottom: 67px;
+	padding-bottom: 50px;
 	border-bottom: 1px solid #B3B3B3;
 	background-color: #fff;
+	box-sizing: border-box;
 }
 
 .close {
@@ -57,5 +59,46 @@ h3{
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 	margin: 38px 90px 45px 90px;
+	cursor: pointer;
+}
+
+.modalWorks{
+	/* position: relative; */
+	display: flex;
+	flex-wrap: wrap;
+	background-color: #fff;
+	gap: 7.5px;
+}
+
+.modalWorks img {
+	width: 75px;
+}
+
+.modalWorks figure {
+	flex-grow: 1;}
+
+.modalWorks figcaption {
+	display: none;
+}
+
+.modalWorks .trashIcone{
+	position: relative;
+	color: #fff;
+	background-color: #000;
+	font-size: 11px;
+}
+
+.modalWorks .buttonTrashIcone{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: relative;
+	width: 17px;
+	height: 17px;
+	top: -97px;
+	left: 53px;
+	border-radius: 2px;
+	border-style: solid;
+	background-color: #000;
 	cursor: pointer;
 }
