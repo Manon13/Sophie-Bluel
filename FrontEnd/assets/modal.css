@@ -5,7 +5,7 @@
 dialog {
 	/* width: 630px;
 	height: 688px; */
-	padding:50px;
+	padding: 26px 30px;
 	background-color: #fff;
 	border: none;
 	border-radius: 10px;
@@ -16,7 +16,7 @@ dialog {
 	display:flex;
 	flex-direction: column;
 	background-color: #fff;
-	margin: 0px 85px;
+	margin: 0px 75px;
 	width: 420px;
 }
 
@@ -43,7 +43,8 @@ h3{
 
 .closeModalBtn {
 	border: none;
-	margin: 6px 16px 0px 562px;
+	margin-left: 96%;
+	background-color: #fff;
 	cursor: pointer;
 }
 
