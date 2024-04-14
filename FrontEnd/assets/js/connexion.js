@@ -34,7 +34,7 @@ function connexion() {
         })
             .then(response => {
                 if (401 === response.status) {
-                    throw new Error("L'email ou le mot de passe est incorrecte. Veuillez réessayer.");
+                    throw new Error("L'email ou le mot de passe est incorrect. Veuillez réessayer.");
                 } else if (500 === response.status) {
                     throw new Error("Le serveur a rencontré un problème : " + response.status);
                 }
@@ -65,13 +65,13 @@ function isEmptyLoginFields() {
     const valueEmail = emailInput.value;
     const PasswordInput = document.querySelector('#password');
     const valuePassword = PasswordInput.value;
+    const divError = document.getElementById("divError");
 
     if (valueEmail === '' || valuePassword === '') {
         const spanEmptyFields = document.createElement("span");
         spanEmptyFields.classList.add("error");
-        spanEmptyFields.innerText = "Veuillez remplir tous les champs";
-        form.appendChild(spanEmptyFields);
-
+        showLoginErrors("Veuillez remplir tous les champs");
+        divError.appendChild(spanEmptyFields);
         return false;
     }
     return true;
@@ -80,29 +80,24 @@ function isEmptyLoginFields() {
 function showLoginErrors(error) {
     const form = document.querySelector('.formConnexion');
     const spanError = document.createElement("span");
+    const divError = document.getElementById("divError");
     spanError.classList.add("error");
-    spanError.innerText = "L'email ou le mot de passe saisie est incorrecte. Veuillez réessayer.";
-    form.appendChild(spanError);
+    spanError.innerText = error;
+    divError.appendChild(spanError);
     return error;
 };
 
 function removeErrorMessages() {
-    const form = document.querySelector('.formConnexion');
-    const errorsSpan = form.querySelectorAll('.error');
-    errorsSpan.forEach(spanError => {
-        spanError.remove();
-    });
-}
+    const divError = document.getElementById("divError");
+    divError.innerHTML = "";
+};
 
 
 function validateEmail(email) {
     const form = document.querySelector('.formConnexion');
     const emailRegExp = new RegExp('^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$');
     if (!emailRegExp.test(email)) {
-        const spanEmailIncorrect = document.createElement("span");
-        spanEmailIncorrect.classList.add("error");
-        spanEmailIncorrect.innerText = "Veuillez saisir une adresse email valide";
-        form.appendChild(spanEmailIncorrect);
+        showLoginErrors("Veuillez saisir une adresse email valide");
         return false;
     }
     return true;
