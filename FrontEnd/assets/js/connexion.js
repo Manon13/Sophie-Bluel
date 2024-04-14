@@ -52,8 +52,7 @@ function connexion() {
                 }
             })
             .catch(error => {
-                showLoginErrors(error);
-                //document.location.href = "./login.html";
+                showLoginErrors(error.message);
             });
     });
 }
@@ -84,8 +83,8 @@ function showLoginErrors(error) {
     spanError.classList.add("error");
     spanError.innerText = "L'email ou le mot de passe saisie est incorrecte. Veuillez réessayer.";
     form.appendChild(spanError);
+    return error;
 };
-
 
 function removeErrorMessages() {
     const form = document.querySelector('.formConnexion');
@@ -93,7 +92,6 @@ function removeErrorMessages() {
     errorsSpan.forEach(spanError => {
         spanError.remove();
     });
-
 }
 
 
