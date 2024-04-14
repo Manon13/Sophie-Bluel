@@ -1,5 +1,3 @@
-//import { generateProject} from "assets/js/portfolio.js";
-
 const dialog = document.querySelector("dialog");
 const openModalBtn = document.querySelector("dialog + button");
 const closeModalBtn = document.querySelector(".closeModalBtn");
@@ -21,10 +19,6 @@ document.addEventListener("click", function (event) {
         dialog.close();
     }
 });
-
-
-//Generation des projets dans la div .modalWorks
-// generateProject(".modalWorks");
 
 
 //Fonction pour créer une icone poubelle sur chaque projet
