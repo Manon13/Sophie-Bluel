@@ -364,14 +364,14 @@ form textarea {
 	text-align: center;
 }
 
-.iconeBanner {
+.iconBanner {
 	font-size: 16px;
 	margin: 5px;
 	color: white;
 	background-color: #000;
 }
 
-.iconeBanner {
+.iconBanner {
 	align-self: center;
 	font-family: 'Work Sans';
 	font-size: 16px;
@@ -386,7 +386,7 @@ form textarea {
 	top: 750px;
 }
 
-.iconeModify {
+.iconModify {
 	font-size: 16px;
 	margin: 5px;
 }
