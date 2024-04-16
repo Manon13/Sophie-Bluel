@@ -3,9 +3,7 @@
 }
 
 dialog {
-	/* width: 630px;
-	height: 688px; */
-	padding: 26px 30px;
+	padding: 0px;
 	background-color: #fff;
 	border: none;
 	border-radius: 10px;
@@ -16,7 +14,7 @@ dialog {
 	display:flex;
 	flex-direction: column;
 	background-color: #fff;
-	margin: 0px 75px;
+	padding: 0px 75px;
 	width: 420px;
 }
 
@@ -37,7 +35,6 @@ h3{
 }
 
 .close {
-	align-items: flex-end;
 	font-size: 32px;
 }
 
@@ -65,7 +62,6 @@ h3{
 }
 
 .modalWorks{
-	/* position: relative; */
 	display: flex;
 	flex-wrap: wrap;
 	background-color: #fff;
@@ -77,20 +73,22 @@ h3{
 }
 
 .modalWorks figure {
-	flex-grow: 1;}
+	flex-grow: 1;
+	background-color: #fff;
+}
 
 .modalWorks figcaption {
 	display: none;
 }
 
-.modalWorks .trashIcone{
+.modalWorks .trashIcon{
 	position: relative;
 	color: #fff;
 	background-color: #000;
 	font-size: 11px;
 }
 
-.modalWorks .buttonTrashIcone{
+.modalWorks .buttonTrashIcon{
 	display: flex;
 	justify-content: center;
 	align-items: center;
