@@ -29,14 +29,14 @@ function editionModeHeader() {
         const banner = document.createElement("div");
         banner.classList.add("banner");
 
-        const iconebanner = document.createElement("i");
-        iconebanner.classList.add("fa-regular", "fa-pen-to-square", "iconeBanner");
+        const iconbanner = document.createElement("i");
+        iconbanner.classList.add("fa-regular", "fa-pen-to-square", "iconBanner");
 
         const spanBanner = document.createElement("span");
         spanBanner.innerText = "Mode édition";
         spanBanner.classList.add("spanBanner");
 
-        spanBanner.insertBefore(iconebanner, spanBanner.firstChild);
+        spanBanner.insertBefore(iconbanner, spanBanner.firstChild);
         banner.appendChild(spanBanner);
         body.insertBefore(banner, header);
     }
@@ -52,14 +52,14 @@ function editWorksBtn() {
         const divModify = document.createElement("div");
         divModify.classList.add("divModify");
 
-        const iconeModify = document.createElement("i");
-        iconeModify.classList.add("fa-regular", "fa-pen-to-square", "iconeModify");
+        const iconModify = document.createElement("i");
+        iconModify.classList.add("fa-regular", "fa-pen-to-square", "iconModify");
 
         const buttonModify = document.createElement("button");
         buttonModify.innerText = "modifier";
         buttonModify.classList.add("openModalBtn");
 
-        buttonModify.insertBefore(iconeModify, buttonModify.firstChild);
+        buttonModify.insertBefore(iconModify, buttonModify.firstChild);
         divModify.appendChild(buttonModify);
         titleWorks.appendChild(buttonModify);
     }
