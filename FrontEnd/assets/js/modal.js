@@ -21,20 +21,59 @@ document.addEventListener("click", function (event) {
 });
 
 
-//Fonction pour créer une icone poubelle sur chaque projet
-async function trashIconeCreation() {
+//Fonction pour créer une icon poubelle sur chaque projet
+async function trashIconCreation() {
     const generateProjectOnModal = await generateProject(".modalWorks");
     const figure = document.querySelectorAll(".modalWorks > .project");
 
     figure.forEach(project => {
-        const trashIcone = document.createElement("i");
-        const buttonTrashIcone = document.createElement("button");
-        buttonTrashIcone.classList.add("buttonTrashIcone");
-        trashIcone.classList.add("fa-solid", "fa-trash-can", "trashIcone");
-        project.appendChild(buttonTrashIcone);
-        buttonTrashIcone.appendChild(trashIcone);
+        const trashIcon = document.createElement("i");
+        const buttonTrashIcon = document.createElement("button");
+
+        // Récupération de l'ID du projet à partir de l'attribut 
+        const projectId = project.dataset.projectId;
+        buttonTrashIcon.setAttribute("data-project-id", projectId);
+
+        buttonTrashIcon.classList.add("buttonTrashIcon");
+        trashIcon.classList.add("fa-solid", "fa-trash-can", "trashIcon");
+        project.appendChild(buttonTrashIcon);
+        buttonTrashIcon.appendChild(trashIcon);
     });
+    deleteWorks();
     return generateProjectOnModal;
 };
 
-trashIconeCreation();
+trashIconCreation();
+
+
+async function deleteWorksWithId(id) {
+    const token = localStorage.getItem("token");
+    const response = await fetch(`http://localhost:5678/api/works/${id}`, {
+        method: "DELETE",
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
+    });
+    if (response.ok) {
+        console.log('Projet supprimé avec succès');
+    } else {
+        console.error('Erreur lors de la suppression du projet');
+    }
+}
+
+//Fonction pour supprimer un projet de la modale & du DOM
+async function deleteWorks() {
+    const buttonTrashIcons = document.querySelectorAll(".buttonTrashIcon");
+    buttonTrashIcons.forEach(buttonTrashIcon => {
+        buttonTrashIcon.addEventListener("click", async function () {
+            const projectId = buttonTrashIcon.getAttribute("data-project-id");
+            await deleteWorksWithId(projectId);
+            buttonTrashIcon.parentElement.remove();
+            const elementToRemove = document.querySelector(`#gallery > .project[data-project-id='${projectId}']`);
+            if (elementToRemove) {
+                elementToRemove.remove();
+            }
+        });
+    });
+}
+
