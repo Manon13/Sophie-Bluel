@@ -23,6 +23,9 @@ async function generateProject(rootSelector) {
         figureProjet.classList.add("project");
         figureProjet.dataset.categoryName = project.category.name;
 
+        //Ajout de l'identifiant du projet à la balise figure
+        figureProjet.dataset.projectId = project.id;
+
         //Création d'une balise img pour l'image du projet
         const imgProjet = document.createElement("img");
         imgProjet.src = project.imageUrl;
