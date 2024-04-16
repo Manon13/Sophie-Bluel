@@ -59,8 +59,6 @@ function connexion() {
 connexion();
 
 function isEmptyLoginFields() {
-    const form = document.querySelector('.formConnexion');
-
     const emailInput = document.querySelector('#email');
     const valueEmail = emailInput.value;
     const PasswordInput = document.querySelector('#password');
@@ -78,7 +76,6 @@ function isEmptyLoginFields() {
 };
 
 function showLoginErrors(error) {
-    const form = document.querySelector('.formConnexion');
     const spanError = document.createElement("span");
     const divError = document.getElementById("divError");
     spanError.classList.add("error");
@@ -94,7 +91,6 @@ function removeErrorMessages() {
 
 
 function validateEmail(email) {
-    const form = document.querySelector('.formConnexion');
     const emailRegExp = new RegExp('^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$');
     if (!emailRegExp.test(email)) {
         showLoginErrors("Veuillez saisir une adresse email valide");
