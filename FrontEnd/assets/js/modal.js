@@ -77,3 +77,14 @@ async function deleteWorks() {
     });
 }
 
+
+//Brouillon de la fonction pour ajouter un projet à la modale
+//Fonction pour ajouter un projet à la modale
+// async function addPhotoToModal() {
+//     const form = document.querySelector("form");
+//     form.addEventListener("submit", async function (event) {
+//         event.preventDefault();
+//         const token = localStorage.getItem("token");
+//         const formData = new FormData(form);
+//     });
+// }
