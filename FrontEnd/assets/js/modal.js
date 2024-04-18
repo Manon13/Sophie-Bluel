@@ -59,7 +59,7 @@ async function deleteWorksWithId(id) {
     } else {
         console.error('Erreur lors de la suppression du projet');
     }
-}
+};
 
 //Fonction pour supprimer un projet de la modale & du DOM
 async function deleteWorks() {
@@ -75,16 +75,50 @@ async function deleteWorks() {
             }
         });
     });
+};
+
+
+
+async function changeButtonTxt() {
+    const fileInput = document.querySelector(".fileInput");
+    fileInput.style.display = "none";
+    const customButton = document.createElement("button");
+    customButton.textContent = "+ Ajouter photo";
+    customButton.classList.add("customButton");
+
+    fileInput.parentNode.insertBefore(customButton, fileInput);
+
+    customButton.addEventListener("click", function () {
+        event.preventDefault();
+        fileInput.click();
+    });
+}
+changeButtonTxt();
+
+
+async function addPhotoToModal() {
+    const buttonAddPhoto = document.querySelector(".addPhotoBtn");
+    buttonAddPhoto.addEventListener("click", function () {
+        const modal1 = document.querySelector(".modal1");
+        modal1.style.display = "none";
+
+        const modal2 = document.querySelector(".modal2");
+        const closeModalBtn2 = document.querySelector(".closeModalBtn2");
+
+        modal2.showModal();
+
+        //Fermeture de la modale avec le bouton close
+        closeModalBtn2.addEventListener("click", function () {
+            modal2.close();
+        });
+
+        //Fermeture de la modale en cliquant en dehors de la modale
+        document.addEventListener("click", function (event) {
+            if (event.target === modal2) {
+                modal2.close();
+            }
+        });
+    });
 }
 
-
-//Brouillon de la fonction pour ajouter un projet à la modale
-//Fonction pour ajouter un projet à la modale
-// async function addPhotoToModal() {
-//     const form = document.querySelector("form");
-//     form.addEventListener("submit", async function (event) {
-//         event.preventDefault();
-//         const token = localStorage.getItem("token");
-//         const formData = new FormData(form);
-//     });
-// }
+addPhotoToModal();

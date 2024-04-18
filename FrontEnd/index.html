@@ -62,16 +62,43 @@
     <section id="portfolio">
       <div class="titleWorks">
         <h2>Mes Projets</h2>
-        <dialog class="dialog">
-          <!-- <div class="dialogContent"> -->
-            <div class="dialogContent">
-              <button class="closeModalBtn" autofocus><span class="close">&times;</span></button>
-              <h3>Galerie photo</h3>
-              <div class="modalWorks"></div>
-              <button class="addPhotoBtn">Ajouter une photo</button>
-            </div>
-          <!-- </div> -->
+        <dialog class="dialog, modal1">
+          <div class="dialogContent">
+            <button class="closeModalBtn" autofocus><span class="close">&times;</span></button>
+            <h3>Galerie photo</h3>
+            <div class="modalWorks"></div>
+            <button class="addPhotoBtn">Ajouter une photo</button>
+          </div>
         </dialog>
+
+        <dialog class="modal2">
+          <div class="modal2Content">
+            <button class="closeModalBtn2" autofocus><span class="close">&times;</span></button>
+            <h3>Ajout photo</h3>
+            <form action="#" method="post" enctype="multipart/form-data">
+              <div class="divPhoto">
+                <label for="photo"><i class="fa-regular fa-image"></i></label>
+                <input type="file" name="photo" id="photo" class="fileInput"/>
+                <p>jpg, png : 4mo max</p>
+              </div>
+              <div class="divForm">
+                <label for="title">Titre</label>
+                <input type="text" name="title" id="title"/>
+              </div>
+              <div class="divForm">
+                <label for="categorie">Catégorie</label>
+                <select id="categorie" name="categorie">
+                  <option value=""></option>
+                  <option value="Objets">Objets</option>
+                  <option value="Appartements">Appartements</option>
+                  <option value="hotelsAndRestaurants">Hotels & Restaurants</option>
+                </select>
+              </div>
+              <input type="submit" value="Valider" class="validateBtn" />
+            </form>
+          </div>
+        </dialog>
+
       </div>
       <div class="gallery" id="gallery"></div>
 
@@ -79,7 +106,7 @@
     <section id="contact">
       <h2>Contact</h2>
       <p>Vous avez un projet ? Discutons-en !</p>
-      <form action="#" method="post">
+      <form action="#" method="post" class="formAddPhoto">
         <label for="name">Nom</label>
         <input type="text" name="name" id="name" />
         <label for="email">Email</label>
