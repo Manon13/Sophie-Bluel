@@ -81,7 +81,6 @@ function showLoginErrors(error) {
     spanError.classList.add("error");
     spanError.innerText = error;
     divError.appendChild(spanError);
-    return error;
 };
 
 function removeErrorMessages() {
