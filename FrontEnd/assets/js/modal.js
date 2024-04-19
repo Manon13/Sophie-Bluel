@@ -2,6 +2,12 @@ const dialog = document.querySelector("dialog");
 const openModalBtn = document.querySelector("dialog + button");
 const closeModalBtn = document.querySelector(".closeModalBtn");
 
+const titleAddPhoto = document.querySelector(".titleAddPhoto");
+titleAddPhoto.style.display = "none";
+
+const form = document.querySelector("form");
+form.style.display = "none";
+
 //Ouverture de la modale
 openModalBtn.addEventListener("click", function () {
     dialog.showModal();
@@ -99,25 +105,21 @@ changeButtonTxt();
 async function addPhotoToModal() {
     const buttonAddPhoto = document.querySelector(".addPhotoBtn");
     buttonAddPhoto.addEventListener("click", function () {
-        const modal1 = document.querySelector(".modal1");
-        modal1.style.display = "none";
 
-        const modal2 = document.querySelector(".modal2");
-        const closeModalBtn2 = document.querySelector(".closeModalBtn2");
+        const titleGalleryPhoto = document.querySelector(".titleGalleryPhoto");
+        titleGalleryPhoto.style.display = "none";
 
-        modal2.showModal();
+        const titleAddPhoto = document.querySelector(".titleAddPhoto");
+        titleAddPhoto.style.display = "block";
 
-        //Fermeture de la modale avec le bouton close
-        closeModalBtn2.addEventListener("click", function () {
-            modal2.close();
-        });
+        const modalWorks = document.querySelector(".modalWorks");
+        modalWorks.style.display = "none";
 
-        //Fermeture de la modale en cliquant en dehors de la modale
-        document.addEventListener("click", function (event) {
-            if (event.target === modal2) {
-                modal2.close();
-            }
-        });
+        const form = document.querySelector("form");
+        form.style.display = "block";
+
+        buttonAddPhoto.style.display = "none";
+
     });
 }
 

@@ -24,10 +24,11 @@ h3{
 	font-weight: 400;
 	font-size: 26px;
 	background-color: #fff;
+	margin-bottom: 35px;
 }
 
 .modalWorks{
-	margin-top: 46px;
+	/* margin-top: 46px; */
 	padding-bottom: 50px;
 	border-bottom: 1px solid #B3B3B3;
 	background-color: #fff;

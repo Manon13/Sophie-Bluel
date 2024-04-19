@@ -65,25 +65,50 @@
         <dialog class="dialog, modal1">
           <div class="dialogContent">
             <button class="closeModalBtn" autofocus><span class="close">&times;</span></button>
-            <h3>Galerie photo</h3>
+            <!-- <button <i class="fa-solid fa-arrow-left"></i> a FINIR § -->
+            <h3 class="titleGalleryPhoto">Galerie photo</h3>
+            <h3 class="titleAddPhoto">Ajout photo</h3>
             <div class="modalWorks"></div>
+            <form action="#" method="post" enctype="multipart/form-data">
+            <div class="divPhoto">
+              <label for="photo"><i class="fa-regular fa-image"></i></label>
+              <input type="file" name="photo" id="photo" class="fileInput" />
+              <p>jpg, png : 4mo max</p>
+            </div>
+            <div class="divForm">
+              <label for="title">Titre</label>
+              <input type="text" name="title" id="title" />
+            </div>
+            <div class="divForm">
+              <label for="categorie">Catégorie</label>
+              <select id="categorie" name="categorie">
+                <option value=""></option>
+                <option value="Objets">Objets</option>
+                <option value="Appartements">Appartements</option>
+                <option value="hotelsAndRestaurants">Hotels & Restaurants</option>
+              </select>
+            </div>
+            <div class="divValidate">
+              <input type="submit" value="Valider" class="validateBtn" />
+            </div>
+          </form>
             <button class="addPhotoBtn">Ajouter une photo</button>
           </div>
         </dialog>
 
-        <dialog class="modal2">
+        <!-- <dialog class="modal2">
           <div class="modal2Content">
             <button class="closeModalBtn2" autofocus><span class="close">&times;</span></button>
             <h3>Ajout photo</h3>
             <form action="#" method="post" enctype="multipart/form-data">
               <div class="divPhoto">
                 <label for="photo"><i class="fa-regular fa-image"></i></label>
-                <input type="file" name="photo" id="photo" class="fileInput"/>
+                <input type="file" name="photo" id="photo" class="fileInput" />
                 <p>jpg, png : 4mo max</p>
               </div>
               <div class="divForm">
                 <label for="title">Titre</label>
-                <input type="text" name="title" id="title"/>
+                <input type="text" name="title" id="title" />
               </div>
               <div class="divForm">
                 <label for="categorie">Catégorie</label>
@@ -95,11 +120,11 @@
                 </select>
               </div>
               <div class="divValidate">
-              <input type="submit" value="Valider" class="validateBtn" />
-            </div>
+                <input type="submit" value="Valider" class="validateBtn" />
+              </div>
             </form>
           </div>
-        </dialog>
+        </dialog> -->
 
       </div>
       <div class="gallery" id="gallery"></div>
