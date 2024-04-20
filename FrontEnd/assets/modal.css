@@ -2,7 +2,7 @@
 	background-color: rgba(0, 0, 0, 0.3);
 }
 
-dialog, .modal2 {
+dialog {
 	padding: 0px;
 	background-color: #fff;
 	border: none;
@@ -10,11 +10,11 @@ dialog, .modal2 {
 	box-sizing: border-box;
 }
 
-.dialogContent, .modal2Content {
+.dialogContent {
 	display:flex;
 	flex-direction: column;
 	background-color: #fff;
-	padding: 15px 75px 0px 75px;
+	padding: 0px 75px;
 	width: 420px;
 }
 
@@ -28,7 +28,6 @@ h3{
 }
 
 .modalWorks{
-	/* margin-top: 46px; */
 	padding-bottom: 50px;
 	border-bottom: 1px solid #B3B3B3;
 	background-color: #fff;
@@ -39,11 +38,25 @@ h3{
 	font-size: 32px;
 }
 
-.closeModalBtn, .closeModalBtn2 {
+.closeModalBtn {
 	position: relative;
+	top: 10px;
 	right: -40px;
 	border: none;
 	margin-left: 96%;
+	background-color: #fff;
+	cursor: pointer;
+}
+
+.fa-arrow-left{
+	font-size: 18px;
+}
+
+.arrowLeftBtn {
+	position: relative;
+	top: -20px;
+	right: 250px;
+	border: none;
 	background-color: #fff;
 	cursor: pointer;
 }
@@ -62,6 +75,12 @@ h3{
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 	margin: 38px 90px 45px 90px;
 	cursor: pointer;
+}
+
+.validateBtn:disabled{
+	color: #fff;
+	background-color: #A7A7A7;
+	cursor: not-allowed;
 }
 
 .modalWorks{
@@ -145,11 +164,13 @@ h3{
 	color: #306685;
 	background-color: #CBD6DC;
 	margin: 6px 0px;
+	cursor: pointer;
 }
 
 form{
 	display: flex;
 	flex-direction: column;
+	background-color: #fff;
 }
 
 .divForm{
@@ -167,7 +188,7 @@ form{
 
 .divForm input, .divForm select{
 	height: 50px;
-	font-size: 1.2em;
+	font-family: "Work Sans";
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 	background-color: #fff;
@@ -176,7 +197,7 @@ form{
 .divForm label{
 	font-size: 14px;
 	font-family: "Work Sans";
-	font-weight: 500;
+	font-weight: 600;
 	color: #3D3D3D;
 	background-color:#fff;
 	margin-bottom: 6px;
@@ -187,4 +208,39 @@ form{
 	justify-content: center;
 	background-color: #fff;
 	border-top: solid 1px #B3B3B3;
+}
+
+.divForm input{
+	font-size: 14px;
+	padding-left: 15px;
+}
+
+.divForm option{
+	background-color: #fff;
+}
+
+.selectForm{
+	font-size: 14px;
+	font-family: "Work Sans";
+	padding-left: 15px;
+	cursor: pointer;
+	-webkit-appearance: none;
+	appearance: none;
+}
+
+.divSelect{
+	position: relative;
+	font-family: "Work Sans";
+}
+
+.divSelect::after{
+		content: "\2335";
+		color: #6C6C6C;
+		font-family: "work Sans";
+		font-size: 1rem;
+		top: 35px;
+		right: 30px;
+		position: absolute;
+		font-weight: bold;
+		pointer-events: none;
 }
