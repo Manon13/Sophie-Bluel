@@ -8,6 +8,9 @@ titleAddPhoto.style.display = "none";
 const form = document.querySelector("form");
 form.style.display = "none";
 
+const arrowLeftBtn = document.querySelector(".arrowLeftBtn");
+arrowLeftBtn.style.visibility = "hidden";
+
 //Ouverture de la modale
 openModalBtn.addEventListener("click", function () {
     dialog.showModal();
@@ -84,7 +87,6 @@ async function deleteWorks() {
 };
 
 
-
 async function changeButtonTxt() {
     const fileInput = document.querySelector(".fileInput");
     fileInput.style.display = "none";
@@ -118,9 +120,35 @@ async function addPhotoToModal() {
         const form = document.querySelector("form");
         form.style.display = "block";
 
+        const arrowLeftBtn = document.querySelector(".arrowLeftBtn");
+        arrowLeftBtn.style.visibility = "visible";
+
         buttonAddPhoto.style.display = "none";
 
     });
 }
-
 addPhotoToModal();
+
+async function returnWorksModal(){
+    const arrowLeftBtn = document.querySelector(".arrowLeftBtn");
+    arrowLeftBtn.addEventListener("click", function () {
+
+        //On cache les elements de la modale 2
+        const titleAddPhoto = document.querySelector(".titleAddPhoto");
+        titleAddPhoto.style.display = "none";
+        const form = document.querySelector("form");
+        form.style.display = "none";
+        const arrowLeftBtn = document.querySelector(".arrowLeftBtn");
+        arrowLeftBtn.style.visibility = "hidden";
+
+        //On réaffiche les elements de la modale 1
+        const titleGalleryPhoto = document.querySelector(".titleGalleryPhoto");
+        titleGalleryPhoto.style.display = "block";
+        const modalWorks = document.querySelector(".modalWorks");
+        modalWorks.style.display = "flex";
+        const buttonAddPhoto = document.querySelector(".addPhotoBtn");
+        buttonAddPhoto.style.display = "block";
+    });
+}
+
+returnWorksModal();
