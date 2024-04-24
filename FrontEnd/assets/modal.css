@@ -80,7 +80,7 @@ h3{
 .validateBtn:disabled{
 	color: #fff;
 	background-color: #A7A7A7;
-	cursor: not-allowed;
+	/* cursor: not-allowed; */
 }
 
 .modalWorks{
@@ -243,4 +243,8 @@ form{
 		position: absolute;
 		font-weight: bold;
 		pointer-events: none;
+}
+
+.thumbnail{
+	height: 169px;
 }

@@ -1,3 +1,5 @@
+// import { showErrors } from "./connexion.js";
+
 const dialog = document.querySelector("dialog");
 const openModalBtn = document.querySelector("dialog + button");
 const closeModalBtn = document.querySelector(".closeModalBtn");
@@ -129,7 +131,7 @@ async function addPhotoToModal() {
 }
 addPhotoToModal();
 
-async function returnWorksModal(){
+async function returnWorksModal() {
     const arrowLeftBtn = document.querySelector(".arrowLeftBtn");
     arrowLeftBtn.addEventListener("click", function () {
 
@@ -150,5 +152,144 @@ async function returnWorksModal(){
         buttonAddPhoto.style.display = "block";
     });
 }
-
 returnWorksModal();
+
+
+function handle_fileinput() {
+    const fileInput = document.querySelector(".fileInput");
+    file = fileInput.files[0];
+
+}
+
+
+
+async function addPhotoToDivPhoto(file) {
+    const fileInput = document.querySelector(".fileInput");
+    const divPhoto = document.querySelector(".divPhoto");
+
+    fileInput.addEventListener("change", function () {
+        const file = fileInput.files[0];
+        if (file) {
+            const reader = new FileReader();
+
+            reader.onload = function (event) {
+                const thumbnail = document.createElement("img");
+                thumbnail.alt = file.name;
+                thumbnail.src = event.target.result;
+                thumbnail.classList.add("thumbnail", "fileInput");
+
+                divPhoto.innerHTML = "";
+                divPhoto.appendChild(thumbnail);
+            };
+
+            // Lire le fichier sélectionné en tant que données URL
+            reader.readAsDataURL(file);
+        }
+    });
+}
+addPhotoToDivPhoto();
+
+async function submitForm() {
+    const form = document.querySelector("form");
+    form.addEventListener("submit", async function (event) {
+        event.preventDefault();
+
+        const formData = new FormData();
+
+        const fileInput = document.querySelector(".fileInput");
+        // const file = fileInput.files[0];
+        console.log(fileInput);
+
+        formData.append("image", file);
+        formData.append("title", document.querySelector("#title").value);
+        formData.append("category", document.querySelector("#categorie").value);
+
+        const token = localStorage.getItem("token");
+
+        const response = await fetch("http://localhost:5678/api/works", {
+            method: "POST",
+            headers: {
+                "accept": "application/json",
+                "Content-Type": "multipart/form-data",
+                'Authorization': `Bearer ${token}`
+            },
+            body: formData
+
+        });
+
+        if (response.ok) {
+            console.log("Photo ajoutée avec succès");
+            dialog.close();
+        } else {
+            console.error("Erreur lors de l'ajout de la photo");
+        }
+    });
+};
+submitForm();
+
+
+// function checkFiles() {
+//     //Vérification du type de fichier
+//     const fileInput = document.querySelector(".fileInput");
+//     const allowedTypes = ["image/jpeg", "image/png"];
+//     const errorSpan = document.querySelector(".errorSpan");
+//     if (!allowedTypes.includes(fileInput.files[0].type)) {
+//         errorSpan.textContent = "Veuillez sélectionner une image au format JPEG ou PNG.";
+//         fileInput.value = "";
+//     } else {
+//         errorSpan.textContent = "";
+//     }
+//     //Vérification de la taille du fichier
+//     const maxSize = 4 * 1024 * 1024; // 4 Mo
+//     if (fileInput.files[0].size > maxSize) {
+//         errorSpan.textContent = "Veuillez sélectionner une image de moins de 4 Mo.";
+//         fileInput.value = "";
+//     } else {
+//         errorSpan.textContent = "";
+//     }
+//     return true;
+// }
+
+
+async function enableSubmitButton() {
+    const photoInput = document.querySelector("input[name='photo']");
+    const titleInput = document.querySelector("input[name='title']");
+    const categorieSelect = document.querySelector("select[name='categorie']");
+
+    const submitButton = document.querySelector(".validateBtn");
+    const errorMessage = document.createElement("span");
+    errorMessage.textContent = "Veuillez remplir tous les champs.";
+    errorMessage.style.display = "none"; // Add this line to hide the error message initially
+
+    const divValidate = document.querySelector(".divValidate");
+    divValidate.appendChild(errorMessage);
+
+    function checkInputs() {
+        const photoValue = photoInput.value.trim();
+        const titleValue = titleInput.value.trim();
+        const categorieValue = categorieSelect.value.trim();
+
+        if (photoValue !== '' && titleValue !== '' && categorieValue !== '') {
+            submitButton.disabled = false;
+            errorMessage.style.display = "none";
+        } else {
+            submitButton.disabled = true;
+        }
+    }
+
+    submitButton.addEventListener("click", function () {
+        checkInputs();
+        if (submitButton.disabled) {
+            errorMessage.style.display = "block";
+        } else {
+            errorMessage.style.display = "none";
+        }
+    });
+
+    photoInput.addEventListener("input", checkInputs);
+    titleInput.addEventListener("input", checkInputs);
+    categorieSelect.addEventListener("input", checkInputs);
+}
+
+enableSubmitButton();
+
