@@ -154,13 +154,6 @@ async function returnWorksModal() {
 }
 returnWorksModal();
 
-// function handle_fileinput() {
-//     const fileInput = document.querySelector(".fileInput");
-//     file = fileInput.files[0];
-
-// }
-
-
 function addPhotoToDivPhoto() {
     const fileInput = document.querySelector(".fileInput");
     const divPhoto = document.querySelector(".divPhoto");
@@ -174,10 +167,15 @@ function addPhotoToDivPhoto() {
                 const thumbnail = document.createElement("img");
                 thumbnail.alt = file.name;
                 thumbnail.src = event.target.result;
-                thumbnail.classList.add("thumbnail", "fileInput");
+                thumbnail.classList.add("thumbnail");
 
-                divPhoto.innerHTML = "";
-                divPhoto.appendChild(thumbnail);
+                divPhoto.style.display = "none";
+                const imgPreviewContainer = document.createElement("div");
+                imgPreviewContainer.classList.add("divPhoto");
+                const form = document.querySelector("#formAddPhoto");
+
+                form.insertBefore(imgPreviewContainer, divPhoto);
+                imgPreviewContainer.appendChild(thumbnail);
             };
 
             // Lire le fichier sélectionné en tant que données URL
@@ -188,20 +186,22 @@ function addPhotoToDivPhoto() {
 addPhotoToDivPhoto();
 
 
-function submitForm() {
-    const form = document.querySelector("form");
+async function submitForm() {
+    const form = document.querySelector("#formAddPhoto");
     form.addEventListener("submit", async function (event) {
         event.preventDefault();
 
-        const formData = new FormData();
+        const formData = new FormData(form);
 
-        console.log(document.querySelector(".thumbnail").src);
+        console.log(document.querySelector("#photo").files.item(0));
         console.log(document.querySelector("#title").value);
         console.log(document.querySelector("#categorie").value);
 
-        formData.append("image", ".thumbnail".src);
-        formData.append("title", document.querySelector("#title").value);
-        formData.append("category", document.querySelector("#categorie").value);
+
+
+        // formData.append("image", document.querySelector("#photo").files.item(0));
+        // formData.append("title", document.querySelector("#title").value);
+        // formData.append("category", document.querySelector("#categorie").value);
 
         const token = localStorage.getItem("token");
 
@@ -209,7 +209,6 @@ function submitForm() {
             method: "POST",
             headers: {
                 "accept": "application/json",
-                "Content-Type": "multipart/form-data",
                 'Authorization': `Bearer ${token}`
             },
             body: formData
@@ -218,7 +217,7 @@ function submitForm() {
 
         if (response.ok) {
             console.log("Photo ajoutée avec succès");
-            dialog.close();
+            // dialog.close();
         } else {
             console.error("Erreur lors de l'ajout de la photo");
         }
@@ -252,45 +251,45 @@ submitForm();
 
 
 //Fonction pour activer le bouton de validation du formulaire
-async function enableSubmitButton() {
-    const photoInput = document.querySelector("input[name='photo']");
-    const titleInput = document.querySelector("input[name='title']");
-    const categorieSelect = document.querySelector("select[name='categorie']");
+// async function enableSubmitButton() {
+//     const photoInput = document.querySelector("input[name='image']");
+//     const titleInput = document.querySelector("input[name='title']");
+//     const categorieSelect = document.querySelector("select[name='category']");
 
-    const submitButton = document.querySelector(".validateBtn");
-    const errorMessage = document.createElement("span");
-    errorMessage.textContent = "Veuillez remplir tous les champs.";
-    errorMessage.style.display = "none";
+//     const submitButton = document.querySelector(".validateBtn");
+//     const errorMessage = document.createElement("span");
+//     errorMessage.textContent = "Veuillez remplir tous les champs.";
+//     errorMessage.style.display = "none";
 
-    const divValidate = document.querySelector(".divValidate");
-    divValidate.appendChild(errorMessage);
+//     const divValidate = document.querySelector(".divValidate");
+//     divValidate.appendChild(errorMessage);
 
-    function checkInputs() {
-        const photoValue = photoInput.value.trim();
-        const titleValue = titleInput.value.trim();
-        const categorieValue = categorieSelect.value.trim();
+//     function checkInputs() {
+//         const photoValue = photoInput.value.trim();
+//         const titleValue = titleInput.value.trim();
+//         const categorieValue = categorieSelect.value.trim();
 
-        if (photoValue !== '' && titleValue !== '' && categorieValue !== '') {
-            submitButton.disabled = false;
-            errorMessage.style.display = "none";
-        } else {
-            submitButton.disabled = true;
-        }
-    }
+//         if (photoValue !== '' && titleValue !== '' && categorieValue !== '') {
+//             submitButton.disabled = false;
+//             errorMessage.style.display = "none";
+//         } else {
+//             submitButton.disabled = true;
+//         }
+//     }
 
-    submitButton.addEventListener("click", function () {
-        checkInputs();
-        if (submitButton.disabled) {
-            errorMessage.style.display = "block";
-        } else {
-            errorMessage.style.display = "none";
-        }
-    });
+//     submitButton.addEventListener("click", function () {
+//         checkInputs();
+//         if (submitButton.disabled) {
+//             errorMessage.style.display = "block";
+//         } else {
+//             errorMessage.style.display = "none";
+//         }
+//     });
 
-    photoInput.addEventListener("input", checkInputs);
-    titleInput.addEventListener("input", checkInputs);
-    categorieSelect.addEventListener("input", checkInputs);
-}
+//     photoInput.addEventListener("input", checkInputs);
+//     titleInput.addEventListener("input", checkInputs);
+//     categorieSelect.addEventListener("input", checkInputs);
+// }
 
-enableSubmitButton();
+// enableSubmitButton();
 

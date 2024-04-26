@@ -69,10 +69,10 @@
             <h3 class="titleGalleryPhoto">Galerie photo</h3>
             <h3 class="titleAddPhoto">Ajout photo</h3>
             <div class="modalWorks"></div>
-            <form action="#" method="post" enctype="multipart/form-data">
+            <form action="#" method="post" id="formAddPhoto" enctype="multipart/form-data">
             <div class="divPhoto">
               <label for="photo"><i class="fa-regular fa-image"></i></label>
-              <input type="file" name="photo" id="photo" class="fileInput" />
+              <input type="file" name="image" id="photo" class="fileInput" />
               <p>jpg, png : 4mo max</p>
             </div>
             <div class="divForm">
@@ -81,15 +81,15 @@
             </div>
             <div class="divForm divSelect">
               <label for="categorie">Catégorie</label>
-              <select id="categorie" name="categorie" class="selectForm">
+              <select id="categorie" name="category" class="selectForm">
                 <option value=""></option>
-                <option value="Objets">Objets</option>
+                <option value="1">Objets</option>
                 <option value="Appartements">Appartements</option>
                 <option value="hotelsAndRestaurants">Hotels & restaurants</option>
               </select>
             </div>
             <div class="divValidate">
-              <input type="submit" value="Valider" class="validateBtn" disabled/>
+              <input type="submit" value="Valider" class="validateBtn"/>
             </div>
           </form>
             <button class="addPhotoBtn">Ajouter une photo</button>
