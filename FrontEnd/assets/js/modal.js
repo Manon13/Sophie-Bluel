@@ -154,16 +154,14 @@ async function returnWorksModal() {
 }
 returnWorksModal();
 
+// function handle_fileinput() {
+//     const fileInput = document.querySelector(".fileInput");
+//     file = fileInput.files[0];
 
-function handle_fileinput() {
-    const fileInput = document.querySelector(".fileInput");
-    file = fileInput.files[0];
-
-}
-
+// }
 
 
-async function addPhotoToDivPhoto(file) {
+function addPhotoToDivPhoto() {
     const fileInput = document.querySelector(".fileInput");
     const divPhoto = document.querySelector(".divPhoto");
 
@@ -189,18 +187,19 @@ async function addPhotoToDivPhoto(file) {
 }
 addPhotoToDivPhoto();
 
-async function submitForm() {
+
+function submitForm() {
     const form = document.querySelector("form");
     form.addEventListener("submit", async function (event) {
         event.preventDefault();
 
         const formData = new FormData();
 
-        const fileInput = document.querySelector(".fileInput");
-        // const file = fileInput.files[0];
-        console.log(fileInput);
+        console.log(document.querySelector(".thumbnail").src);
+        console.log(document.querySelector("#title").value);
+        console.log(document.querySelector("#categorie").value);
 
-        formData.append("image", file);
+        formData.append("image", ".thumbnail".src);
         formData.append("title", document.querySelector("#title").value);
         formData.append("category", document.querySelector("#categorie").value);
 
@@ -228,6 +227,7 @@ async function submitForm() {
 submitForm();
 
 
+//Fonction pour vérifier le type et la taille du fichier
 // function checkFiles() {
 //     //Vérification du type de fichier
 //     const fileInput = document.querySelector(".fileInput");
@@ -251,6 +251,7 @@ submitForm();
 // }
 
 
+//Fonction pour activer le bouton de validation du formulaire
 async function enableSubmitButton() {
     const photoInput = document.querySelector("input[name='photo']");
     const titleInput = document.querySelector("input[name='title']");
@@ -259,7 +260,7 @@ async function enableSubmitButton() {
     const submitButton = document.querySelector(".validateBtn");
     const errorMessage = document.createElement("span");
     errorMessage.textContent = "Veuillez remplir tous les champs.";
-    errorMessage.style.display = "none"; // Add this line to hide the error message initially
+    errorMessage.style.display = "none";
 
     const divValidate = document.querySelector(".divValidate");
     divValidate.appendChild(errorMessage);
