@@ -185,6 +185,56 @@ function addPhotoToDivPhoto() {
 }
 addPhotoToDivPhoto();
 
+//Fonction pour ajouter une photo à la modale & au DOM
+function addPhotoToGallery(photo) {
+    const figure = document.createElement("figure");
+    figure.classList.add("project");
+    figure.dataset.projectId = photo.id;
+
+    const img = document.createElement("img");
+    img.src = photo.imageUrl;
+    img.alt = photo.title;
+
+    const figcaption = document.createElement("figcaption");
+    figcaption.textContent = photo.title;
+    figcaption.classList.add("figcaption");
+
+    const gallery = document.querySelector("#gallery");
+    gallery.appendChild(figure);
+    figure.appendChild(img);
+    figure.appendChild(figcaption);
+}
+
+function addPhotoToModalGallery(photo) {
+    const figure = document.createElement("figure");
+    figure.classList.add("project");
+    figure.dataset.projectId = photo.id;
+
+    const img = document.createElement("img");
+    img.src = photo.imageUrl;
+    img.alt = photo.title;
+
+    //Création de l'icone poubelle
+    const trashIcon = document.createElement("i");
+    const buttonTrashIcon = document.createElement("button");
+
+    // Récupération de l'ID du projet à partir de l'attribut 
+    const projectId = photo.id;
+    buttonTrashIcon.setAttribute("data-project-id", projectId);
+
+    buttonTrashIcon.classList.add("buttonTrashIcon");
+    trashIcon.classList.add("fa-solid", "fa-trash-can", "trashIcon");
+
+
+    const modalWorks = document.querySelector(".modalWorks");
+    modalWorks.appendChild(figure);
+    figure.appendChild(img);
+    figure.appendChild(buttonTrashIcon);
+    buttonTrashIcon.appendChild(trashIcon);
+
+    deleteWorks();
+}
+
 
 async function submitForm() {
     const form = document.querySelector("#formAddPhoto");
@@ -196,12 +246,6 @@ async function submitForm() {
         console.log(document.querySelector("#photo").files.item(0));
         console.log(document.querySelector("#title").value);
         console.log(document.querySelector("#categorie").value);
-
-
-
-        // formData.append("image", document.querySelector("#photo").files.item(0));
-        // formData.append("title", document.querySelector("#title").value);
-        // formData.append("category", document.querySelector("#categorie").value);
 
         const token = localStorage.getItem("token");
 
@@ -216,8 +260,13 @@ async function submitForm() {
         });
 
         if (response.ok) {
+            const photo = await response.json();
+            addPhotoToModalGallery(photo);
+            addPhotoToGallery(photo);
+
             console.log("Photo ajoutée avec succès");
-            // dialog.close();
+            clearFormFields();
+
         } else {
             console.error("Erreur lors de l'ajout de la photo");
         }
@@ -225,6 +274,44 @@ async function submitForm() {
 };
 submitForm();
 
+//Fonction qui vide les champs du formulaire
+function clearFormFields() {
+    const form = document.querySelector("#formAddPhoto");
+    const divPhoto = document.querySelector(".divPhoto");
+    divPhoto.style.display = "block";
+    const imgPreviewContainer = document.querySelector(".divPhoto");
+    if (imgPreviewContainer){
+    imgPreviewContainer.remove();
+    }
+    
+}
+
+
+
+async function getCategory() {
+    const response = await fetch('http://localhost:5678/api/categories');
+    const categories = await response.json();
+    return categories;
+}
+
+async function generateCategoriesInForm() {
+    const categories = await getCategory();
+    const select = document.querySelector(".selectForm");
+
+    //Creation du champs vide
+    const optionEmpty = document.createElement("option");
+    optionEmpty.value = "";
+    optionEmpty.textContent = "";
+    select.appendChild(optionEmpty);
+
+    categories.forEach(category => {
+        const option = document.createElement("option");
+        option.value = category.id;
+        option.textContent = category.name;
+        select.appendChild(option);
+    });
+}
+generateCategoriesInForm();
 
 //Fonction pour vérifier le type et la taille du fichier
 // function checkFiles() {

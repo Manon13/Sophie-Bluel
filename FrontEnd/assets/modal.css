@@ -87,7 +87,7 @@ h3{
 	display: flex;
 	flex-wrap: wrap;
 	background-color: #fff;
-	gap: 7.5px;
+	gap: 11px;
 }
 
 .modalWorks img {
@@ -95,7 +95,7 @@ h3{
 }
 
 .modalWorks figure {
-	flex-grow: 1;
+	/* flex-grow: 1; */
 	background-color: #fff;
 }
 
