@@ -315,7 +315,7 @@ function clearFormFields() {
 
     //Désactivation du bouton de validation
     const submitButton = document.querySelector(".validateBtn");
-    submitButton.disabled = true;
+    submitButton.classList.add("disabled");
 
     const imgPreviewContainer = document.querySelector(".divPhoto");
     imgPreviewContainer.remove();
@@ -324,19 +324,22 @@ function clearFormFields() {
     divPhoto.style.display = "flex";
 }
 
-//Fonction pour activer le bouton de validation du formulaire
-async function enableSubmitButton() {
+//Fonction pour activer le bouton de validation du formulaire & le message d'erreur
+function enableSubmitButton() {
     const photoInput = document.querySelector("input[name='image']");
     const titleInput = document.querySelector("input[name='title']");
     const categorieSelect = document.querySelector("select[name='category']");
 
     const submitButton = document.querySelector(".validateBtn");
+    submitButton.classList.add("disabled");
+    submitButton.classList.remove("validateBtn");
     const errorMessage = document.createElement("span");
     errorMessage.textContent = "Veuillez remplir tous les champs.";
-    errorMessage.style.display = "none";
+    errorMessage.classList.add("errorMessage");
+    errorMessage.style.visibility = "hidden";
 
-    const divValidate = document.querySelector(".divValidate");
-    divValidate.appendChild(errorMessage);
+    const divSelect = document.querySelector(".divSelect");
+    divSelect.appendChild(errorMessage);
 
     function checkInputs() {
         const photoValue = photoInput.value.trim();
@@ -344,27 +347,28 @@ async function enableSubmitButton() {
         const categorieValue = categorieSelect.value.trim();
 
         if (photoValue !== '' && titleValue !== '' && categorieValue !== '') {
-            submitButton.disabled = false;
-            errorMessage.style.display = "none";
+            submitButton.classList.remove("disabled");
+            submitButton.classList.add("validateBtn");
         } else {
-            submitButton.disabled = true;
+            submitButton.classList.add("disabled");
+            submitButton.classList.remove("validateBtn");
         }
     }
-
-    submitButton.addEventListener("click", function () {
-        checkInputs();
-        if (submitButton.disabled) {
-            errorMessage.style.display = "block";
-        } else {
-            errorMessage.style.display = "none";
-        }
-    });
 
     photoInput.addEventListener("input", checkInputs);
     titleInput.addEventListener("input", checkInputs);
     categorieSelect.addEventListener("input", checkInputs);
+
+    submitButton.addEventListener("click", function () {
+        if (submitButton.classList.contains("disabled")) {
+            errorMessage.style.visibility = "visible";
+        } else {
+            errorMessage.style.visibility = "hidden";
+        }
+    });
 }
 enableSubmitButton();
+
 
 //Fonction pour vérifier le type et la taille du fichier
 // function checkFiles() {
