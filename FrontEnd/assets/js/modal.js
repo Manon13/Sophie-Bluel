@@ -53,7 +53,6 @@ async function trashIconCreation() {
     deleteWorks();
     return generateProjectOnModal;
 };
-
 trashIconCreation();
 
 
@@ -131,6 +130,7 @@ async function addPhotoToModal() {
 }
 addPhotoToModal();
 
+
 async function returnWorksModal() {
     const arrowLeftBtn = document.querySelector(".arrowLeftBtn");
     arrowLeftBtn.addEventListener("click", function () {
@@ -153,6 +153,7 @@ async function returnWorksModal() {
     });
 }
 returnWorksModal();
+
 
 function addPhotoToDivPhoto() {
     const fileInput = document.querySelector(".fileInput");
@@ -205,6 +206,7 @@ function addPhotoToGallery(photo) {
     figure.appendChild(figcaption);
 }
 
+
 function addPhotoToModalGallery(photo) {
     const figure = document.createElement("figure");
     figure.classList.add("project");
@@ -225,7 +227,6 @@ function addPhotoToModalGallery(photo) {
     buttonTrashIcon.classList.add("buttonTrashIcon");
     trashIcon.classList.add("fa-solid", "fa-trash-can", "trashIcon");
 
-
     const modalWorks = document.querySelector(".modalWorks");
     modalWorks.appendChild(figure);
     figure.appendChild(img);
@@ -235,7 +236,34 @@ function addPhotoToModalGallery(photo) {
     deleteWorks();
 }
 
+//Générer les catégories dans le formulaire
+async function getCategory() {
+    const response = await fetch('http://localhost:5678/api/categories');
+    const categories = await response.json();
+    return categories;
+}
 
+
+async function generateCategoriesInForm() {
+    const categories = await getCategory();
+    const select = document.querySelector(".selectForm");
+
+    //Creation du champs vide
+    const optionEmpty = document.createElement("option");
+    optionEmpty.value = "";
+    optionEmpty.textContent = "";
+    select.appendChild(optionEmpty);
+
+    categories.forEach(category => {
+        const option = document.createElement("option");
+        option.value = category.id;
+        option.textContent = category.name;
+        select.appendChild(option);
+    });
+}
+generateCategoriesInForm();
+
+//Fonction pour soumettre le formulaire
 async function submitForm() {
     const form = document.querySelector("#formAddPhoto");
     form.addEventListener("submit", async function (event) {
@@ -245,7 +273,7 @@ async function submitForm() {
 
         console.log(document.querySelector("#photo").files.item(0));
         console.log(document.querySelector("#title").value);
-        console.log(document.querySelector("#categorie").value);
+        console.log(document.querySelector("#category").value);
 
         const token = localStorage.getItem("token");
 
@@ -274,44 +302,69 @@ async function submitForm() {
 };
 submitForm();
 
-//Fonction qui vide les champs du formulaire
+//Fonction qui vérifie les champs du formulaire
 function clearFormFields() {
-    const form = document.querySelector("#formAddPhoto");
-    const divPhoto = document.querySelector(".divPhoto");
-    divPhoto.style.display = "block";
+    const photoInput = document.querySelector("input[name='image']");
+    const titleInput = document.querySelector("input[name='title']");
+    const categorieSelect = document.querySelector("select[name='category']");
+
+    //Réinitialisation des champs du formulaire
+    photoInput.value = "";
+    titleInput.value = "";
+    categorieSelect.value = "";
+
+    //Désactivation du bouton de validation
+    const submitButton = document.querySelector(".validateBtn");
+    submitButton.disabled = true;
+
     const imgPreviewContainer = document.querySelector(".divPhoto");
-    if (imgPreviewContainer){
     imgPreviewContainer.remove();
+
+    const divPhoto = document.querySelector(".divPhoto");
+    divPhoto.style.display = "flex";
+}
+
+//Fonction pour activer le bouton de validation du formulaire
+async function enableSubmitButton() {
+    const photoInput = document.querySelector("input[name='image']");
+    const titleInput = document.querySelector("input[name='title']");
+    const categorieSelect = document.querySelector("select[name='category']");
+
+    const submitButton = document.querySelector(".validateBtn");
+    const errorMessage = document.createElement("span");
+    errorMessage.textContent = "Veuillez remplir tous les champs.";
+    errorMessage.style.display = "none";
+
+    const divValidate = document.querySelector(".divValidate");
+    divValidate.appendChild(errorMessage);
+
+    function checkInputs() {
+        const photoValue = photoInput.value.trim();
+        const titleValue = titleInput.value.trim();
+        const categorieValue = categorieSelect.value.trim();
+
+        if (photoValue !== '' && titleValue !== '' && categorieValue !== '') {
+            submitButton.disabled = false;
+            errorMessage.style.display = "none";
+        } else {
+            submitButton.disabled = true;
+        }
     }
-    
-}
 
-
-
-async function getCategory() {
-    const response = await fetch('http://localhost:5678/api/categories');
-    const categories = await response.json();
-    return categories;
-}
-
-async function generateCategoriesInForm() {
-    const categories = await getCategory();
-    const select = document.querySelector(".selectForm");
-
-    //Creation du champs vide
-    const optionEmpty = document.createElement("option");
-    optionEmpty.value = "";
-    optionEmpty.textContent = "";
-    select.appendChild(optionEmpty);
-
-    categories.forEach(category => {
-        const option = document.createElement("option");
-        option.value = category.id;
-        option.textContent = category.name;
-        select.appendChild(option);
+    submitButton.addEventListener("click", function () {
+        checkInputs();
+        if (submitButton.disabled) {
+            errorMessage.style.display = "block";
+        } else {
+            errorMessage.style.display = "none";
+        }
     });
+
+    photoInput.addEventListener("input", checkInputs);
+    titleInput.addEventListener("input", checkInputs);
+    categorieSelect.addEventListener("input", checkInputs);
 }
-generateCategoriesInForm();
+enableSubmitButton();
 
 //Fonction pour vérifier le type et la taille du fichier
 // function checkFiles() {
@@ -335,48 +388,4 @@ generateCategoriesInForm();
 //     }
 //     return true;
 // }
-
-
-//Fonction pour activer le bouton de validation du formulaire
-// async function enableSubmitButton() {
-//     const photoInput = document.querySelector("input[name='image']");
-//     const titleInput = document.querySelector("input[name='title']");
-//     const categorieSelect = document.querySelector("select[name='category']");
-
-//     const submitButton = document.querySelector(".validateBtn");
-//     const errorMessage = document.createElement("span");
-//     errorMessage.textContent = "Veuillez remplir tous les champs.";
-//     errorMessage.style.display = "none";
-
-//     const divValidate = document.querySelector(".divValidate");
-//     divValidate.appendChild(errorMessage);
-
-//     function checkInputs() {
-//         const photoValue = photoInput.value.trim();
-//         const titleValue = titleInput.value.trim();
-//         const categorieValue = categorieSelect.value.trim();
-
-//         if (photoValue !== '' && titleValue !== '' && categorieValue !== '') {
-//             submitButton.disabled = false;
-//             errorMessage.style.display = "none";
-//         } else {
-//             submitButton.disabled = true;
-//         }
-//     }
-
-//     submitButton.addEventListener("click", function () {
-//         checkInputs();
-//         if (submitButton.disabled) {
-//             errorMessage.style.display = "block";
-//         } else {
-//             errorMessage.style.display = "none";
-//         }
-//     });
-
-//     photoInput.addEventListener("input", checkInputs);
-//     titleInput.addEventListener("input", checkInputs);
-//     categorieSelect.addEventListener("input", checkInputs);
-// }
-
-// enableSubmitButton();
 
