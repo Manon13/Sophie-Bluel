@@ -1,36 +1,36 @@
-// import { showErrors } from "./connexion.js";
-
-const dialog = document.querySelector("dialog");
-const openModalBtn = document.querySelector("dialog + button");
-const closeModalBtn = document.querySelector(".closeModalBtn");
-
-const titleAddPhoto = document.querySelector(".titleAddPhoto");
-titleAddPhoto.style.display = "none";
-
-const form = document.querySelector("form");
-form.style.display = "none";
-
-const arrowLeftBtn = document.querySelector(".arrowLeftBtn");
-arrowLeftBtn.style.visibility = "hidden";
-
-//Ouverture de la modale
-openModalBtn.addEventListener("click", function () {
-    dialog.showModal();
-});
-
-//Fermeture de la modale avec le bouton close
-closeModalBtn.addEventListener("click", function () {
-    dialog.close();
-});
-
-//Fermeture de la modale en cliquant en dehors de la modale
-//A REPARER ! La modale se ferme quand je clique juste hors du .dialogContent et non hors de la modale entière
-document.addEventListener("click", function (event) {
-    if (event.target === dialog) {
+//Fonction pour ouvrir la modale
+function openModal(){
+    const dialog = document.querySelector("dialog");
+    const openModalBtn = document.querySelector("dialog + button");
+    const closeModalBtn = document.querySelector(".closeModalBtn");
+    
+    const titleAddPhoto = document.querySelector(".titleAddPhoto");
+    titleAddPhoto.style.display = "none";
+    
+    const form = document.querySelector("form");
+    form.style.display = "none";
+    
+    const arrowLeftBtn = document.querySelector(".arrowLeftBtn");
+    arrowLeftBtn.style.visibility = "hidden";
+    
+    //Ouverture de la modale
+    openModalBtn.addEventListener("click", function () {
+        dialog.showModal();
+    });
+    
+    //Fermeture de la modale avec le bouton close
+    closeModalBtn.addEventListener("click", function () {
         dialog.close();
-    }
-});
-
+    });
+    
+    //Fermeture de la modale en cliquant en dehors de la modale
+    document.addEventListener("click", function (event) {
+        if (event.target === dialog) {
+            dialog.close();
+        }
+    });
+}
+openModal();
 
 //Fonction pour créer une icon poubelle sur chaque projet
 async function trashIconCreation() {
@@ -55,7 +55,7 @@ async function trashIconCreation() {
 };
 trashIconCreation();
 
-
+//Fonction pour supprimer un projet avec son ID
 async function deleteWorksWithId(id) {
     const token = localStorage.getItem("token");
     const response = await fetch(`http://localhost:5678/api/works/${id}`, {
@@ -87,8 +87,8 @@ async function deleteWorks() {
     });
 };
 
-
-async function changeButtonTxt() {
+//Fonction pour changer l'apparence du bouton d'ajout de photo
+function changeButtonTxt() {
     const fileInput = document.querySelector(".fileInput");
     fileInput.style.display = "none";
     const customButton = document.createElement("button");
@@ -104,7 +104,7 @@ async function changeButtonTxt() {
 }
 changeButtonTxt();
 
-
+//Fonction pour afficher la seconde page de la modale
 async function addPhotoToModal() {
     const buttonAddPhoto = document.querySelector(".addPhotoBtn");
     buttonAddPhoto.addEventListener("click", function () {
@@ -130,7 +130,7 @@ async function addPhotoToModal() {
 }
 addPhotoToModal();
 
-
+//Fonction pour retourner à la première page de la modale
 async function returnWorksModal() {
     const arrowLeftBtn = document.querySelector(".arrowLeftBtn");
     arrowLeftBtn.addEventListener("click", function () {
@@ -154,7 +154,7 @@ async function returnWorksModal() {
 }
 returnWorksModal();
 
-
+//Fonction pour ajouter la photo importé dans la div photo
 function addPhotoToDivPhoto() {
     const fileInput = document.querySelector(".fileInput");
     const divPhoto = document.querySelector(".divPhoto");
@@ -186,7 +186,7 @@ function addPhotoToDivPhoto() {
 }
 addPhotoToDivPhoto();
 
-//Fonction pour ajouter une photo à la modale & au DOM
+//Fonction pour ajouter la photo importé dans la galerie du site (DOM)
 function addPhotoToGallery(photo) {
     const figure = document.createElement("figure");
     figure.classList.add("project");
@@ -206,7 +206,7 @@ function addPhotoToGallery(photo) {
     figure.appendChild(figcaption);
 }
 
-
+//Fonction pour importé dynamiquement la photo importé dans la modale 1
 function addPhotoToModalGallery(photo) {
     const figure = document.createElement("figure");
     figure.classList.add("project");
@@ -236,24 +236,25 @@ function addPhotoToModalGallery(photo) {
     deleteWorks();
 }
 
-//Générer les catégories dans le formulaire
+//Générer les catégories de photos pour le formulaire
 async function getCategory() {
     const response = await fetch('http://localhost:5678/api/categories');
     const categories = await response.json();
     return categories;
 }
 
-
+//Fonction pour générer les catégories dans le formulaire
 async function generateCategoriesInForm() {
     const categories = await getCategory();
     const select = document.querySelector(".selectForm");
 
-    //Creation du champs vide
+    //Création du champs vide
     const optionEmpty = document.createElement("option");
     optionEmpty.value = "";
     optionEmpty.textContent = "";
     select.appendChild(optionEmpty);
 
+    //Création des options pour chaque catégorie
     categories.forEach(category => {
         const option = document.createElement("option");
         option.value = category.id;
@@ -341,6 +342,7 @@ function enableSubmitButton() {
     const divSelect = document.querySelector(".divSelect");
     divSelect.appendChild(errorMessage);
 
+    //Fonction pour vérifier que les champs ne sont pas vides
     function checkInputs() {
         const photoValue = photoInput.value.trim();
         const titleValue = titleInput.value.trim();
