@@ -188,43 +188,37 @@ function addPhotoToDivPhoto() {
 addPhotoToDivPhoto();
 
 //Fonction pour vérifier le type et la taille du fichier
-function checkFiles(){
+function checkFiles() {
     const photoInput = document.querySelector("input[name='image']");
     const allowedTypes = ["image/jpeg", "image/png"];
 
     if (!allowedTypes.includes(photoInput.files[0].type)) {
         showErrorforPhotoFile("Veuillez sélectionner une image au format JPEG ou PNG.");
+        photoInput.value = "";
         return false;
     }
 
     if (photoInput.files[0].size > 4 * 1024 * 1024) {
         showErrorforPhotoFile("Veuillez sélectionner une image de moins de 4 Mo.");
+        photoInput.value = "";
         return false;
     }
 
+    showErrorforPhotoFile("&nbsp;");
     return true;
 }
 
 //Fonction pour gérer les erreurs de l'input Photo
 function showErrorforPhotoFile(error) {
-
-    if (document.querySelector(".errorMessage")) {
-        document.querySelector(".errorMessage").remove();
-    }
-    const errorMessage = document.createElement("span");
-    errorMessage.classList.add("errorMessagePhoto");
-    errorMessage.innerText = error;
-
-    const divTitleForm = document.querySelector(".divTitle");
-    // divTitleForm.appendChild(errorMessage);
-    divTitleForm.insertBefore(errorMessage, divTitleForm.firstChild);
+    const errorMsg = document.querySelector(".errorMessagePhoto");
+    errorMsg.innerHTML = error;
 };
 
-
 //Fonction pour ajouter la photo importé dans la galerie du site (DOM)
-function addPhotoToGallery(photo) {
+function addPhotoToGallery(photo, categoryText) {
     const figure = document.createElement("figure");
     figure.classList.add("project");
+    figure.dataset.categoryName = categoryText;
     figure.dataset.projectId = photo.id;
 
     const img = document.createElement("img");
@@ -305,12 +299,10 @@ async function submitForm() {
     form.addEventListener("submit", async function (event) {
         event.preventDefault();
 
+        const category = document.querySelector("#category");
+        const categoryText = category.options[category.value].text;
+
         const formData = new FormData(form);
-
-        console.log(document.querySelector("#photo").files.item(0));
-        console.log(document.querySelector("#title").value);
-        console.log(document.querySelector("#category").value);
-
         const token = localStorage.getItem("token");
 
         const response = await fetch("http://localhost:5678/api/works", {
@@ -320,16 +312,18 @@ async function submitForm() {
                 'Authorization': `Bearer ${token}`
             },
             body: formData
-
         });
 
         if (response.ok) {
-            const photo = await response.json();
-            addPhotoToModalGallery(photo);
-            addPhotoToGallery(photo);
+            await response.json()
 
-            console.log("Photo ajoutée avec succès");
-            clearFormFields();
+                .then(photo => {
+
+                    addPhotoToModalGallery(photo);
+                    addPhotoToGallery(photo, categoryText);
+                    console.log("Photo ajoutée avec succès");
+                    clearFormFields();
+                })
 
         } else {
             console.error("Erreur lors de l'ajout de la photo");
@@ -383,6 +377,7 @@ function enableSubmitButton() {
         const titleValue = titleInput.value.trim();
         const categorieValue = categorieSelect.value.trim();
 
+        console.log(photoValue);
         if (photoValue !== '' && titleValue !== '' && categorieValue !== '') {
             submitButton.classList.remove("disabled");
             submitButton.classList.add("validateBtn");

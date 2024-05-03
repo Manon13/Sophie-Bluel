@@ -27,13 +27,6 @@ h3 {
 	margin-bottom: 35px;
 }
 
-.modalWorks {
-	padding-bottom: 50px;
-	border-bottom: 1px solid #B3B3B3;
-	background-color: #fff;
-	box-sizing: border-box;
-}
-
 .close {
 	font-size: 32px;
 }
@@ -81,7 +74,10 @@ h3 {
 .modalWorks {
 	display: flex;
 	flex-wrap: wrap;
+	padding-bottom: 50px;
+	border-bottom: 1px solid #B3B3B3;
 	background-color: #fff;
+	box-sizing: border-box;
 	gap: 11px;
 }
 
@@ -90,7 +86,6 @@ h3 {
 }
 
 .modalWorks figure {
-	/* flex-grow: 1; */
 	background-color: #fff;
 }
 
@@ -172,7 +167,7 @@ form {
 .divForm {
 	display: flex;
 	flex-direction: column;
-	margin-top: 30px;
+	/* margin-top: 30px; */
 	background-color: #fff;
 }
 
@@ -227,6 +222,7 @@ form {
 
 .divSelect {
 	position: relative;
+	margin-top: 30px;
 	font-family: "Work Sans";
 }
 
@@ -258,14 +254,13 @@ form {
 .errorMessagePhoto{
 	text-align: center;
 	font-size: 14px;
-	padding-top: 15px;
+	margin: 8px 0px;
 	font-family: "work Sans";
 	color: red;
 	background-color: #fff;
 }
 
 .disabled {
-
 	height: 36px;
 	width: 237px;
 	font-family: 'Syne';

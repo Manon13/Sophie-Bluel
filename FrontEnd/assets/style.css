@@ -25,6 +25,10 @@ time, mark, audio, video {
 }
 
 /* HTML5 display-role reset for older browsers */
+* {
+	background-color: #FFFEF8;
+}
+
 article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
 	display: block;
@@ -32,6 +36,10 @@ footer, header, hgroup, menu, nav, section {
 
 body {
 	line-height: 1;
+	margin: auto;
+	overflow-x: hidden;
+	font-family: 'Work Sans';
+	font-size: 14px;
 }
 
 ol,
@@ -56,12 +64,6 @@ table {
 }
 
 /** end reset css**/
-body {
-	margin: auto;
-	overflow-x: hidden;
-	font-family: 'Work Sans';
-	font-size: 14px;
-}
 
 header,
 main,
@@ -219,6 +221,10 @@ li:hover {
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
 
+#formContact {
+	background-color: #FFFEF8;
+}
+
 #formContact input[type="submit"]{
 	font-family: 'Syne';
 	font-weight: 700;
@@ -235,10 +241,6 @@ footer nav ul {
 	display: flex;
 	justify-content: flex-end;
 	margin: 2em;
-}
-
-* {
-	background-color: #FFFEF8;
 }
 
 form input {
