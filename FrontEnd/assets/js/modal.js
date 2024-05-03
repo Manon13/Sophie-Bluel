@@ -1,28 +1,28 @@
 //Fonction pour ouvrir la modale
-function openModal(){
+function openModal() {
     const dialog = document.querySelector("dialog");
     const openModalBtn = document.querySelector("dialog + button");
     const closeModalBtn = document.querySelector(".closeModalBtn");
-    
+
     const titleAddPhoto = document.querySelector(".titleAddPhoto");
     titleAddPhoto.style.display = "none";
-    
+
     const form = document.querySelector("form");
     form.style.display = "none";
-    
+
     const arrowLeftBtn = document.querySelector(".arrowLeftBtn");
     arrowLeftBtn.style.visibility = "hidden";
-    
+
     //Ouverture de la modale
     openModalBtn.addEventListener("click", function () {
         dialog.showModal();
     });
-    
+
     //Fermeture de la modale avec le bouton close
     closeModalBtn.addEventListener("click", function () {
         dialog.close();
     });
-    
+
     //Fermeture de la modale en cliquant en dehors de la modale
     document.addEventListener("click", function (event) {
         if (event.target === dialog) {
@@ -161,7 +161,7 @@ function addPhotoToDivPhoto() {
 
     fileInput.addEventListener("change", function () {
         const file = fileInput.files[0];
-        if (file) {
+        if (checkFiles(file)) {
             const reader = new FileReader();
 
             reader.onload = function (event) {
@@ -172,7 +172,8 @@ function addPhotoToDivPhoto() {
 
                 divPhoto.style.display = "none";
                 const imgPreviewContainer = document.createElement("div");
-                imgPreviewContainer.classList.add("divPhoto");
+                imgPreviewContainer.classList.add("divPhoto", "imgPreviewContainer");
+
                 const form = document.querySelector("#formAddPhoto");
 
                 form.insertBefore(imgPreviewContainer, divPhoto);
@@ -185,6 +186,40 @@ function addPhotoToDivPhoto() {
     });
 }
 addPhotoToDivPhoto();
+
+//Fonction pour vérifier le type et la taille du fichier
+function checkFiles(){
+    const photoInput = document.querySelector("input[name='image']");
+    const allowedTypes = ["image/jpeg", "image/png"];
+
+    if (!allowedTypes.includes(photoInput.files[0].type)) {
+        showErrorforPhotoFile("Veuillez sélectionner une image au format JPEG ou PNG.");
+        return false;
+    }
+
+    if (photoInput.files[0].size > 4 * 1024 * 1024) {
+        showErrorforPhotoFile("Veuillez sélectionner une image de moins de 4 Mo.");
+        return false;
+    }
+
+    return true;
+}
+
+//Fonction pour gérer les erreurs de l'input Photo
+function showErrorforPhotoFile(error) {
+
+    if (document.querySelector(".errorMessage")) {
+        document.querySelector(".errorMessage").remove();
+    }
+    const errorMessage = document.createElement("span");
+    errorMessage.classList.add("errorMessagePhoto");
+    errorMessage.innerText = error;
+
+    const divTitleForm = document.querySelector(".divTitle");
+    // divTitleForm.appendChild(errorMessage);
+    divTitleForm.insertBefore(errorMessage, divTitleForm.firstChild);
+};
+
 
 //Fonction pour ajouter la photo importé dans la galerie du site (DOM)
 function addPhotoToGallery(photo) {
@@ -370,28 +405,4 @@ function enableSubmitButton() {
     });
 }
 enableSubmitButton();
-
-
-//Fonction pour vérifier le type et la taille du fichier
-// function checkFiles() {
-//     //Vérification du type de fichier
-//     const fileInput = document.querySelector(".fileInput");
-//     const allowedTypes = ["image/jpeg", "image/png"];
-//     const errorSpan = document.querySelector(".errorSpan");
-//     if (!allowedTypes.includes(fileInput.files[0].type)) {
-//         errorSpan.textContent = "Veuillez sélectionner une image au format JPEG ou PNG.";
-//         fileInput.value = "";
-//     } else {
-//         errorSpan.textContent = "";
-//     }
-//     //Vérification de la taille du fichier
-//     const maxSize = 4 * 1024 * 1024; // 4 Mo
-//     if (fileInput.files[0].size > maxSize) {
-//         errorSpan.textContent = "Veuillez sélectionner une image de moins de 4 Mo.";
-//         fileInput.value = "";
-//     } else {
-//         errorSpan.textContent = "";
-//     }
-//     return true;
-// }
 
