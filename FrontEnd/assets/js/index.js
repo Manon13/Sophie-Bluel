@@ -1,24 +1,24 @@
-function checkUserLogin() {
+export function checkUserLogin() {
     const token = localStorage.getItem("token");
     if (token) {
         document.getElementById("loginBtn").style.display = "none";
         document.getElementById("logoutBtn").style.display = "block";
     }
 }
-checkUserLogin();
+// checkUserLogin();
 
 
-function logout() {
+export function logout() {
     const logoutBtn = document.getElementById("logoutBtn");
     logoutBtn.addEventListener("click", function () {
         localStorage.removeItem("token");
         document.location.href = "./login.html";
     });
 }
-logout();
+// logout();
 
 
-function editionModeHeader() {
+export function editionModeHeader() {
     const token = localStorage.getItem("token");
     if (token) {
 
@@ -41,9 +41,9 @@ function editionModeHeader() {
         body.insertBefore(banner, header);
     }
 };
-editionModeHeader();
+// editionModeHeader();
 
-function editWorksBtn() {
+export function editWorksBtn() {
     const token = localStorage.getItem("token");
     if (token) {
 
@@ -64,7 +64,7 @@ function editWorksBtn() {
         titleWorks.appendChild(buttonModify);
     }
 }
-editWorksBtn();
+// editWorksBtn();
 
 
 

@@ -6,7 +6,7 @@ async function recoverWorks() {
 }
 
 
-async function generateProject(rootSelector) {
+export async function generateProject(rootSelector) {
     const works = await recoverWorks();
 
     // Possible d'utiliser forEach() => https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach
@@ -43,10 +43,10 @@ async function generateProject(rootSelector) {
     }
     return works;
 }
-generateProject("#gallery");
+// generateProject("#gallery");
 
 
-async function generateCategories() {
+export async function generateCategories() {
     const response = await fetch('http://localhost:5678/api/categories');
     const categories = await response.json();
 
@@ -54,11 +54,10 @@ async function generateCategories() {
     const categoriesSet = new Set(categories.map(category => category.name));
     return categoriesSet;
 }
-generateCategories();
+// generateCategories();
 
 
-async function filterWorkCategories() {
-
+export async function filterWorkCategories() {
     const categoriesSet = await generateCategories();
 
     const divFilter = document.createElement("div");
@@ -98,7 +97,7 @@ async function filterWorkCategories() {
     });
 }
 
-filterWorkCategories();
+// filterWorkCategories();
 
 
 

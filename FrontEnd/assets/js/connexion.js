@@ -1,23 +1,24 @@
-function submitLoginForm() {
-    const form = document.querySelector('.formConnexion');
-    form.addEventListener("submit", function (event) {
-        event.preventDefault();
-
-        removeErrorMessages();
-
-        const emailInput = document.querySelector('#email');
-
-        if (!validateEmail(emailInput.value)) {
-            return null;
+export function submitLoginForm() {
+    document.addEventListener("DOMContentLoaded", function() {
+        const form = document.querySelector('.formConnexion');
+        if (form) {
+            form.addEventListener("submit", function (event) {
+                event.preventDefault();
+                removeErrorMessages();
+                const emailInput = document.querySelector('#email');
+                if (!validateEmail(emailInput.value)) {
+                    return null;
+                }
+                if (!isEmptyLoginFields()) {
+                    return null;
+                }
+                loginRequest(event.target);
+            });
         }
-
-        if (!isEmptyLoginFields()) {
-            return null;
-        }
-        loginRequest(event.target);
     });
 };
-submitLoginForm();
+// submitLoginForm();
+
 
 function loginRequest(form) {
 
