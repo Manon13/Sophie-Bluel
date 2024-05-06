@@ -1,4 +1,5 @@
 import { generateProject } from './portfolio.js';
+import { clearFormFields, checkFiles } from './utils.js';
 
 //Fonction pour ouvrir la modale
 export function openModal() {

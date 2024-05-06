@@ -1,7 +1,7 @@
 import { submitLoginForm } from './connexion.js';
 import {checkUserLogin, logout, editionModeHeader, editWorksBtn} from './index.js';
 import {generateProject, generateCategories, filterWorkCategories} from './portfolio.js';
-import {checkFiles, generateCategoriesInForm,clearFormFields, enableSubmitButton} from './utils.js';
+import {checkFiles, generateCategoriesInForm, enableSubmitButton} from './utils.js';
 import {openModal, trashIconCreation, changeButtonTxt, addPhotoToModal, returnWorksModal, addPhotoToDivPhoto, submitForm} from './modal.js';
 
 
@@ -35,6 +35,5 @@ submitForm();
 //Fonction importé de utils.js
 checkFiles();
 generateCategoriesInForm();
-clearFormFields();
 enableSubmitButton();
 
