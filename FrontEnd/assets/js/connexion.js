@@ -1,3 +1,4 @@
+/** Soumet le formulaire de connexion lorsqu'il est envoyé. **/
 export function submitLoginForm() {
     document.addEventListener("DOMContentLoaded", function() {
         const form = document.querySelector('.formConnexion');
@@ -17,11 +18,14 @@ export function submitLoginForm() {
         }
     });
 };
-// submitLoginForm();
 
-
+/**
+ * Effectue une demande de connexion au serveur avec les informations du formulaire de connexion.
+ * Stocke le token d'authentification dans le stockage local si la demande réussit et redirige vers la page d'acceuil.
+ * Affiche les messages d'erreur en cas de problème lors de la connexion.
+ * @param {HTMLFormElement} form - Le formulaire de connexion HTML.
+**/
 function loginRequest(form) {
-
     //Récupération des données du formulaire
     const connexion = {
         email: event.target.querySelector("[name=email]").value,
@@ -63,8 +67,10 @@ function loginRequest(form) {
         });
 };
 
-
-
+/**
+ * Vérifie si les champs du formulaire de connexion sont vides.
+ * @returns {boolean} Renvoie vrai si les champs ne sont pas vides, sinon faux
+**/
 function isEmptyLoginFields() {
     const emailInput = document.querySelector('#email');
     const valueEmail = emailInput.value;
@@ -82,6 +88,10 @@ function isEmptyLoginFields() {
     return true;
 };
 
+/**
+ * Affiche un message d'erreur sur la page.
+ * @param {string} error - Le message d'erreur à afficher.
+ **/
 function showErrors(error) {
     const spanError = document.createElement("span");
     const divError = document.getElementById("divError");
@@ -90,12 +100,17 @@ function showErrors(error) {
     divError.appendChild(spanError);
 };
 
+/** Supprime tous les messages d'erreur affichés dans la divError. **/
 function removeErrorMessages() {
     const divError = document.getElementById("divError");
     divError.innerHTML = "";
 };
 
-
+/**
+ * Valide une adresse e-mail
+ * @param {string} email - L'adresse e-mail à vérifier
+ * @returns {boolean} Renvoie vrai si l'adresse mail est valaide, sinon false.
+**/
 function validateEmail(email) {
     const emailRegExp = new RegExp('^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$');
     if (!emailRegExp.test(email)) {

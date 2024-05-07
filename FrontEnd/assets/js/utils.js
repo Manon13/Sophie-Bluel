@@ -1,5 +1,9 @@
-//Fonction pour vérifier le type et la taille du fichier
-export function checkFiles() {
+/**
+ * Fonction pour vérifier le type et la taille du fichier
+ * @param {file} file - Le fichier sélectionné.
+ * @returns {boolean} - Retourne true si le fichier est valide, sinon false.
+**/
+export function checkFiles(file) {
     const photoInput = document.querySelector("input[name='image']");
     const allowedTypes = ["image/jpeg", "image/png"];
 
@@ -17,22 +21,25 @@ export function checkFiles() {
 
     showErrorforPhotoFile("&nbsp;");
     return true;
-}
+};
 
-//Fonction pour gérer les erreurs de l'input Photo
+/**
+ * Fonction pour gérer les erreurs de l'input Photo
+ * @param {string} error - Le message d'erreur à afficher
+**/
 function showErrorforPhotoFile(error) {
     const errorMsg = document.querySelector(".errorMessagePhoto");
     errorMsg.innerHTML = error;
 };
 
-//Générer les catégories de photos pour le formulaire
+/** Générer les catégories de photos pour le formulaire **/
 async function getCategory() {
     const response = await fetch('http://localhost:5678/api/categories');
     const categories = await response.json();
     return categories;
-}
+};
 
-//Fonction pour générer les catégories dans le formulaire
+/** Fonction pour générer les catégories dans le formulaire. **/
 export async function generateCategoriesInForm() {
     const categories = await getCategory();
     const select = document.querySelector(".selectForm");
@@ -50,10 +57,9 @@ export async function generateCategoriesInForm() {
         option.textContent = category.name;
         select.appendChild(option);
     });
-}
-// generateCategoriesInForm();
+};
 
-//Fonction qui vérifie les champs du formulaire
+/** Fonction qui vérifie les champs du formulaire **/
 export function clearFormFields() {
     const photoInput = document.querySelector("input[name='image']");
     const titleInput = document.querySelector("input[name='title']");
@@ -77,10 +83,9 @@ export function clearFormFields() {
     if (divPhoto) {
         divPhoto.style.display = "flex";
     }
-}
+};
 
-
-//Fonction pour activer le bouton de validation du formulaire & le message d'erreur
+/** Fonction pour activer le bouton de validation du formulaire & le message d'erreur **/
 export function enableSubmitButton() {
     const photoInput = document.querySelector("input[name='image']");
     const titleInput = document.querySelector("input[name='title']");
@@ -97,7 +102,7 @@ export function enableSubmitButton() {
     const divSelect = document.querySelector(".divSelect");
     divSelect.appendChild(errorMessage);
 
-    //Fonction pour vérifier que les champs ne sont pas vides
+    //Fonction pour vérifier que les champs du formulaire pour ajouter une photo ne sont pas vides.
     function checkInputs() {
         const photoValue = photoInput.value.trim();
         const titleValue = titleInput.value.trim();
@@ -126,6 +131,4 @@ export function enableSubmitButton() {
             errorMessage.style.visibility = "hidden";
         }
     });
-}
-// enableSubmitButton();
-
+};

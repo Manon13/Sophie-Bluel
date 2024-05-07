@@ -1,7 +1,7 @@
 import { generateProject } from './portfolio.js';
 import { clearFormFields, checkFiles } from './utils.js';
 
-//Fonction pour ouvrir la modale
+/** Fonction pour ouvrir la modale **/
 export function openModal() {
     const dialog = document.querySelector("dialog");
     const openModalBtn = document.querySelector("dialog + button");
@@ -32,10 +32,9 @@ export function openModal() {
             dialog.close();
         }
     });
-}
-// openModal();
+};
 
-//Fonction pour créer une icon poubelle sur chaque projet
+/** Fonction pour créer une icon poubelle sur chaque projet **/
 export async function trashIconCreation() {
     const generateProjectOnModal = await generateProject(".modalWorks");
     const figure = document.querySelectorAll(".modalWorks > .project");
@@ -56,9 +55,12 @@ export async function trashIconCreation() {
     deleteWorks();
     return generateProjectOnModal;
 };
-// trashIconCreation();
 
-//Fonction pour supprimer un projet avec son ID
+/**
+ * Fonction pour supprimer un projet avec son ID
+ * @param {number} id - L'ID du projet à supprimer
+ *@returns {Promise<void>} - Une promesse qui se résout lorsque le projet est supprimé avec succès.
+**/
 async function deleteWorksWithId(id) {
     const token = localStorage.getItem("token");
     const response = await fetch(`http://localhost:5678/api/works/${id}`, {
@@ -74,7 +76,7 @@ async function deleteWorksWithId(id) {
     }
 };
 
-//Fonction pour supprimer un projet de la modale & du DOM
+/** Fonction pour supprimer un projet de la modale & du DOM **/
 async function deleteWorks() {
     const buttonTrashIcons = document.querySelectorAll(".buttonTrashIcon");
     buttonTrashIcons.forEach(buttonTrashIcon => {
@@ -90,7 +92,7 @@ async function deleteWorks() {
     });
 };
 
-//Fonction pour changer l'apparence du bouton d'ajout de photo
+/** Fonction pour changer l'apparence du bouton d'ajout de photo **/
 export function changeButtonTxt() {
     const fileInput = document.querySelector(".fileInput");
     fileInput.style.display = "none";
@@ -104,10 +106,9 @@ export function changeButtonTxt() {
         event.preventDefault();
         fileInput.click();
     });
-}
-// changeButtonTxt();
+};
 
-//Fonction pour afficher la seconde page de la modale
+/** Fonction pour afficher la seconde page de la modale **/
 export async function addPhotoToModal() {
     const buttonAddPhoto = document.querySelector(".addPhotoBtn");
     buttonAddPhoto.addEventListener("click", function () {
@@ -130,10 +131,9 @@ export async function addPhotoToModal() {
         buttonAddPhoto.style.display = "none";
 
     });
-}
-// addPhotoToModal();
+};
 
-//Fonction pour retourner à la première page de la modale
+/** Fonction pour retourner à la première page de la modale **/
 export async function returnWorksModal() {
     const arrowLeftBtn = document.querySelector(".arrowLeftBtn");
     arrowLeftBtn.addEventListener("click", function () {
@@ -154,10 +154,9 @@ export async function returnWorksModal() {
         const buttonAddPhoto = document.querySelector(".addPhotoBtn");
         buttonAddPhoto.style.display = "block";
     });
-}
-// returnWorksModal();
+};
 
-//Fonction pour ajouter la photo importé dans la div photo
+/** Fonction pour ajouter la photo importé dans la div photo **/
 export function addPhotoToDivPhoto() {
     const fileInput = document.querySelector(".fileInput");
     const divPhoto = document.querySelector(".divPhoto");
@@ -187,12 +186,14 @@ export function addPhotoToDivPhoto() {
             reader.readAsDataURL(file);
         }
     });
-}
-// addPhotoToDivPhoto();
+};
 
-
-
-//Fonction pour ajouter la photo importé dans la galerie du site (DOM)
+/**
+ * Fonction pour ajouter la photo importé dans la galerie du site (DOM)
+ * @param {object} photo - L'objet représentant la photo à ajouter à la galerie.
+ * @param {string} categoryText - Le nom de la catégorie pour la photo.
+ * @returns {void}
+**/
 function addPhotoToGallery(photo, categoryText) {
     const figure = document.createElement("figure");
     figure.classList.add("project");
@@ -211,9 +212,13 @@ function addPhotoToGallery(photo, categoryText) {
     gallery.appendChild(figure);
     figure.appendChild(img);
     figure.appendChild(figcaption);
-}
+};
 
-//Fonction pour importé dynamiquement la photo importé dans la modale 1
+/**
+ * Fonction pour importé dynamiquement la photo importé dans la modale 1
+ * @param {object} photo - The photo object containing the details of the photo.
+ * @returns {void} 
+**/
 function addPhotoToModalGallery(photo) {
     const figure = document.createElement("figure");
     figure.classList.add("project");
@@ -241,9 +246,9 @@ function addPhotoToModalGallery(photo) {
     buttonTrashIcon.appendChild(trashIcon);
 
     deleteWorks();
-}
+};
 
-//Fonction pour soumettre le formulaire
+/** Fonction pour soumettre le formulaire **/
 export async function submitForm() {
     const form = document.querySelector("#formAddPhoto");
     form.addEventListener("submit", async function (event) {
@@ -280,5 +285,3 @@ export async function submitForm() {
         }
     });
 };
-// submitForm();
-

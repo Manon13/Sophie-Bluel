@@ -1,15 +1,18 @@
-//Fonction pour récupérer les projets depuis l'API
+/** Fonction pour récupérer les projets depuis l'API **/
 async function recoverWorks() {
     const response = await fetch('http://localhost:5678/api/works');
     const works = await response.json();
     return works;
-}
+};
 
-
+/**
+ * Fonction qui génère des éléments de projet et les rajoute à la racine spécifié
+ * @param {string} rootSelector - Le sélecteur pour l'élément racine où les projets seront ajoutés.
+ * @returns {Promise<Array>} - Une promesse qui se résout à un tableau d'objets de projet.
+ **/
 export async function generateProject(rootSelector) {
     const works = await recoverWorks();
 
-    // Possible d'utiliser forEach() => https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach
     for (let i = 0; i < works.length; i++) {
         const project = works[i];
 
@@ -42,10 +45,9 @@ export async function generateProject(rootSelector) {
         figureProjet.appendChild(figcaptionProjet);
     }
     return works;
-}
-// generateProject("#gallery");
+};
 
-
+/** Récupère les catégories depuis l'API et retourne un ensemble de catégories uniques. **/
 export async function generateCategories() {
     const response = await fetch('http://localhost:5678/api/categories');
     const categories = await response.json();
@@ -53,10 +55,9 @@ export async function generateCategories() {
     // Vérifier qu'une catégorie soit unique avec la méthode has() de l'objet Set
     const categoriesSet = new Set(categories.map(category => category.name));
     return categoriesSet;
-}
-// generateCategories();
+};
 
-
+/** Fonction qui filtre les catégories de travail et affiche les boutons de filtre correspondants. **/
 export async function filterWorkCategories() {
     const categoriesSet = await generateCategories();
 
@@ -95,9 +96,7 @@ export async function filterWorkCategories() {
             });
         });
     });
-}
-
-// filterWorkCategories();
+};
 
 
 

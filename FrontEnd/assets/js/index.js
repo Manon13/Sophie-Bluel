@@ -1,23 +1,30 @@
+/**
+ * Vérifie si l'utilisateur est connecté en vérifiant la présence d'un jeton dans le localStorage.
+ * Si l'utilisateur est connecté, cela masque le bouton de connexion et affiche le bouton de déconnexion.
+**/
 export function checkUserLogin() {
     const token = localStorage.getItem("token");
     if (token) {
         document.getElementById("loginBtn").style.display = "none";
         document.getElementById("logoutBtn").style.display = "block";
     }
-}
-// checkUserLogin();
+};
 
-
+/** Déconnecte l'utilisateur en supprimant le jeton d'authentification du stockage local
+ * et redirige vers la page de connexion.
+**/
 export function logout() {
     const logoutBtn = document.getElementById("logoutBtn");
     logoutBtn.addEventListener("click", function () {
         localStorage.removeItem("token");
         document.location.href = "./login.html";
     });
-}
-// logout();
+};
 
-
+/**
+ * Active le mode édition dans l'en-tête si l'utilisateur est connecté.
+ * Insère une bannière dans le corps de la page pour indiquer le mode édition.
+**/
 export function editionModeHeader() {
     const token = localStorage.getItem("token");
     if (token) {
@@ -41,8 +48,11 @@ export function editionModeHeader() {
         body.insertBefore(banner, header);
     }
 };
-// editionModeHeader();
 
+/**
+* Ajoute un bouton de modification aux travaux s'il y a un utilisateur connecté.
+ * Insère le bouton de modification dans le titre des travaux.
+**/
 export function editWorksBtn() {
     const token = localStorage.getItem("token");
     if (token) {
@@ -63,8 +73,4 @@ export function editWorksBtn() {
         divModify.appendChild(buttonModify);
         titleWorks.appendChild(buttonModify);
     }
-}
-// editWorksBtn();
-
-
-
+};
