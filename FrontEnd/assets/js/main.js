@@ -1,8 +1,8 @@
 import { submitLoginForm } from './connexion.js';
-import {checkUserLogin, logout, editionModeHeader, editWorksBtn} from './index.js';
-import {generateProject, generateCategories, filterWorkCategories} from './portfolio.js';
-import {checkFiles, generateCategoriesInForm, enableSubmitButton} from './utils.js';
-import {openModal, trashIconCreation, changeButtonTxt, addPhotoToModal, returnWorksModal, addPhotoToDivPhoto, submitForm} from './modal.js';
+import { checkUserLogin, logout, editionModeHeader, editWorksBtn } from './index.js';
+import { generateProject, generateCategories, filterWorkCategories } from './portfolio.js';
+import { checkFiles, generateCategoriesInForm, enableSubmitButton } from './utils.js';
+import { openModal, trashIconCreation, changeButtonTxt, addPhotoToModal, returnWorksModal, addPhotoToDivPhoto, submitForm } from './modal.js';
 
 
 //Fonction importé de connexion.js

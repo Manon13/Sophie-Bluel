@@ -3,35 +3,38 @@ import { clearFormFields, checkFiles } from './utils.js';
 
 /** Fonction pour ouvrir la modale **/
 export function openModal() {
-    const dialog = document.querySelector("dialog");
-    const openModalBtn = document.querySelector("dialog + button");
-    const closeModalBtn = document.querySelector(".closeModalBtn");
+    const token = localStorage.getItem("token");
+    if (token) {
+        const dialog = document.querySelector("dialog");
+        const openModalBtn = document.querySelector("dialog + button");
+        const closeModalBtn = document.querySelector(".closeModalBtn");
 
-    const titleAddPhoto = document.querySelector(".titleAddPhoto");
-    titleAddPhoto.style.display = "none";
+        const titleAddPhoto = document.querySelector(".titleAddPhoto");
+        titleAddPhoto.style.display = "none";
 
-    const form = document.querySelector("form");
-    form.style.display = "none";
+        const form = document.querySelector("form");
+        form.style.display = "none";
 
-    const arrowLeftBtn = document.querySelector(".arrowLeftBtn");
-    arrowLeftBtn.style.visibility = "hidden";
+        const arrowLeftBtn = document.querySelector(".arrowLeftBtn");
+        arrowLeftBtn.style.visibility = "hidden";
 
-    //Ouverture de la modale
-    openModalBtn.addEventListener("click", function () {
-        dialog.showModal();
-    });
+        //Ouverture de la modale
+        openModalBtn.addEventListener("click", function () {
+            dialog.showModal();
+        });
 
-    //Fermeture de la modale avec le bouton close
-    closeModalBtn.addEventListener("click", function () {
-        dialog.close();
-    });
-
-    //Fermeture de la modale en cliquant en dehors de la modale
-    document.addEventListener("click", function (event) {
-        if (event.target === dialog) {
+        //Fermeture de la modale avec le bouton close
+        closeModalBtn.addEventListener("click", function () {
             dialog.close();
-        }
-    });
+        });
+
+        //Fermeture de la modale en cliquant en dehors de la modale
+        document.addEventListener("click", function (event) {
+            if (event.target === dialog) {
+                dialog.close();
+            }
+        });
+    }
 };
 
 /** Fonction pour créer une icon poubelle sur chaque projet **/
@@ -216,7 +219,7 @@ function addPhotoToGallery(photo, categoryText) {
 
 /**
  * Fonction pour importé dynamiquement la photo importé dans la modale 1
- * @param {object} photo - The photo object containing the details of the photo.
+ * @param {object} photo - L'objet photo contenant les détails de la photo.
  * @returns {void} 
 **/
 function addPhotoToModalGallery(photo) {

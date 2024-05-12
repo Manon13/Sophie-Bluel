@@ -97,6 +97,3 @@ export async function filterWorkCategories() {
         });
     });
 };
-
-
-

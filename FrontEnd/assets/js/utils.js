@@ -123,7 +123,7 @@ export function enableSubmitButton() {
         titleInput.addEventListener("input", checkInputs);
         categorieSelect.addEventListener("input", checkInputs);
     }
-    
+
     submitButton.addEventListener("click", function () {
         if (submitButton.classList.contains("disabled")) {
             errorMessage.style.visibility = "visible";
