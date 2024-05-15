@@ -108,7 +108,6 @@ export function enableSubmitButton() {
         const titleValue = titleInput.value.trim();
         const categorieValue = categorieSelect.value.trim();
 
-        console.log(photoValue);
         if (photoValue !== '' && titleValue !== '' && categorieValue !== '') {
             submitButton.classList.remove("disabled");
             submitButton.classList.add("validateBtn");

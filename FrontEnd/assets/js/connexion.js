@@ -1,6 +1,6 @@
 /** Soumet le formulaire de connexion lorsqu'il est envoyé. **/
 export function submitLoginForm() {
-    document.addEventListener("DOMContentLoaded", function() {
+    document.addEventListener("DOMContentLoaded", function () {
         const form = document.querySelector('.formConnexion');
         if (form) {
             form.addEventListener("submit", function (event) {
@@ -32,7 +32,6 @@ function loginRequest(form) {
         password: event.target.querySelector("[name=password]").value
     };
 
-    console.log(JSON.stringify(connexion));
     // Appel de la fonction fetch avec toutes les informations nécessaires
     // Création de la charge utile au format JSON
     fetch("http://localhost:5678/api/users/login", {

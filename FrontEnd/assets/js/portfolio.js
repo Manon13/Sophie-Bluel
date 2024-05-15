@@ -48,7 +48,7 @@ export async function generateProject(rootSelector) {
 };
 
 /** Récupère les catégories depuis l'API et retourne un ensemble de catégories uniques. **/
-export async function generateCategories() {
+async function generateCategories() {
     const response = await fetch('http://localhost:5678/api/categories');
     const categories = await response.json();
 
@@ -59,8 +59,12 @@ export async function generateCategories() {
 
 /** Fonction qui filtre les catégories de travail et affiche les boutons de filtre correspondants. **/
 export async function filterWorkCategories() {
-    const categoriesSet = await generateCategories();
+    const token = localStorage.getItem("token");
+    if (token) {
+        return;
+    }
 
+    const categoriesSet = await generateCategories();
     const divFilter = document.createElement("div");
     divFilter.classList.add("divFilters");
     const divGallery = document.querySelector(".gallery");

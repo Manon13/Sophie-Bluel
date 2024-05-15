@@ -3,41 +3,38 @@ import { clearFormFields, checkFiles } from './utils.js';
 
 /** Fonction pour ouvrir la modale **/
 export function openModal() {
-    const token = localStorage.getItem("token");
-    if (token) {
-        const dialog = document.querySelector("dialog");
-        const openModalBtn = document.querySelector("dialog + button");
-        const closeModalBtn = document.querySelector(".closeModalBtn");
+    const dialog = document.querySelector("dialog");
+    const openModalBtn = document.querySelector("dialog + button");
+    const closeModalBtn = document.querySelector(".closeModalBtn");
 
-        const titleAddPhoto = document.querySelector(".titleAddPhoto");
-        titleAddPhoto.style.display = "none";
+    const titleAddPhoto = document.querySelector(".titleAddPhoto");
+    titleAddPhoto.style.display = "none";
 
-        const form = document.querySelector("form");
-        form.style.display = "none";
+    const form = document.querySelector("form");
+    form.style.display = "none";
 
-        const arrowLeftBtn = document.querySelector(".arrowLeftBtn");
-        arrowLeftBtn.style.visibility = "hidden";
+    const arrowLeftBtn = document.querySelector(".arrowLeftBtn");
+    arrowLeftBtn.style.visibility = "hidden";
 
-        //Ouverture de la modale
-        openModalBtn.addEventListener("click", function () {
-            dialog.showModal();
-        });
+    //Ouverture de la modale
+    openModalBtn.addEventListener("click", function () {
+        dialog.showModal();
+    });
 
-        //Fermeture de la modale avec le bouton close
-        closeModalBtn.addEventListener("click", function () {
+    //Fermeture de la modale avec le bouton close
+    closeModalBtn.addEventListener("click", function () {
+        dialog.close();
+    });
+
+    //Fermeture de la modale en cliquant en dehors de la modale
+    document.addEventListener("click", function (event) {
+        if (event.target === dialog) {
             dialog.close();
-        });
-
-        //Fermeture de la modale en cliquant en dehors de la modale
-        document.addEventListener("click", function (event) {
-            if (event.target === dialog) {
-                dialog.close();
-            }
-        });
-    }
+        }
+    });
 };
 
-/** Fonction pour créer une icon poubelle sur chaque projet **/
+/** Fonction pour créer une icone poubelle sur chaque projet **/
 export async function trashIconCreation() {
     const generateProjectOnModal = await generateProject(".modalWorks");
     const figure = document.querySelectorAll(".modalWorks > .project");
@@ -66,17 +63,12 @@ export async function trashIconCreation() {
 **/
 async function deleteWorksWithId(id) {
     const token = localStorage.getItem("token");
-    const response = await fetch(`http://localhost:5678/api/works/${id}`, {
+    await fetch(`http://localhost:5678/api/works/${id}`, {
         method: "DELETE",
         headers: {
             'Authorization': `Bearer ${token}`
         }
     });
-    if (response.ok) {
-        console.log('Projet supprimé avec succès');
-    } else {
-        console.error('Erreur lors de la suppression du projet');
-    }
 };
 
 /** Fonction pour supprimer un projet de la modale & du DOM **/
@@ -114,6 +106,7 @@ export function changeButtonTxt() {
 /** Fonction pour afficher la seconde page de la modale **/
 export async function addPhotoToModal() {
     const buttonAddPhoto = document.querySelector(".addPhotoBtn");
+
     buttonAddPhoto.addEventListener("click", function () {
 
         const titleGalleryPhoto = document.querySelector(".titleGalleryPhoto");
@@ -132,7 +125,6 @@ export async function addPhotoToModal() {
         arrowLeftBtn.style.visibility = "visible";
 
         buttonAddPhoto.style.display = "none";
-
     });
 };
 
@@ -279,12 +271,8 @@ export async function submitForm() {
 
                     addPhotoToModalGallery(photo);
                     addPhotoToGallery(photo, categoryText);
-                    console.log("Photo ajoutée avec succès");
                     clearFormFields();
-                })
-
-        } else {
-            console.error("Erreur lors de l'ajout de la photo");
+                });
         }
     });
 };
